@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer permanent app height="100vh" class="sidebar">
     <v-list-item class="mb-5 px-6">
-      <v-list-item-content >
+      <v-list-item-content>
         <v-row align="center" no-gutters>
           <v-col cols="auto">
             <v-icon class="text-h4 primary--text">mdi-cat</v-icon>
@@ -14,7 +14,7 @@
     </v-list-item>
 
     <v-list dense nav class="px-6">
-      <v-subheader class="text-uppercase">MENU</v-subheader>
+      <v-subheader class="text-uppercase">Menu</v-subheader>
       <v-list-item v-for="item in menuItems" :key="item.title" link>
         <v-row align="center" no-gutters>
           <v-col cols="auto">
@@ -25,11 +25,11 @@
           </v-col>
         </v-row>
       </v-list-item>
-      <v-divider class="small-divider mt-5"></v-divider>
+      <v-divider class="small-divider mt-5 custom-divider"></v-divider>
     </v-list>
 
     <v-list dense nav class="px-6">
-      <v-subheader class="text-uppercase">ANALITYCS</v-subheader>
+      <v-subheader class="text-uppercase">Analytics</v-subheader>
       <v-list-item v-for="item in analyticsItems" :key="item.title" link>
         <v-row align="center" no-gutters>
           <v-col cols="auto">
@@ -40,11 +40,11 @@
           </v-col>
         </v-row>
       </v-list-item>
-      <v-divider class="small-divider mt-5"></v-divider>
+      <v-divider class="small-divider mt-5 custom-divider"></v-divider>
     </v-list>
 
     <v-list dense nav class="px-6">
-      <v-subheader class="text-uppercase">SCHEDULE</v-subheader>
+      <v-subheader class="text-uppercase">Schedule</v-subheader>
       <v-list-item v-for="item in scheduleItems" :key="item.title" link>
         <v-row align="center" no-gutters>
           <v-col cols="auto">
@@ -53,13 +53,19 @@
           <v-col>
             <v-list-item-title class="ml-2">{{ item.title }}</v-list-item-title>
           </v-col>
+          <v-col v-if="item.title === 'Appointments'" cols="auto">
+            <v-chip
+              class="notification-chip ml-2"
+              label
+            >2</v-chip>
+          </v-col>
         </v-row>
       </v-list-item>
-      <v-divider class="small-divider mt-5"></v-divider>
+      <v-divider class="small-divider mt-5 custom-divider"></v-divider>
     </v-list>
 
     <v-list dense nav class="px-6">
-      <v-subheader class="text-uppercase">HELP</v-subheader>
+      <v-subheader class="text-uppercase">Help</v-subheader>
       <v-list-item v-for="item in helpItems" :key="item.title" link>
         <v-row align="center" no-gutters>
           <v-col cols="auto">
@@ -117,7 +123,22 @@ export default {
 .sidebar {
   height: 100vh;
 }
-.text-error {
-  color: #f44336;
+
+.custom-divider {
+  border-color: #DAE3F8 !important;
+  border: 1px solid;
+}
+
+.notification-chip {
+  background-color: #E53761 !important;
+  color: white !important;
+  border-radius: 16px;
+  font-size: 12px;
+  height: 20px;
+  min-width: 20px;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
