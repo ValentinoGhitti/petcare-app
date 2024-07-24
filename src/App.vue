@@ -1,16 +1,18 @@
 <template>
   <v-app class="d-flex flex-row">
     <PCSidebar></PCSidebar>
-    <PCTopbar></PCTopbar>
-    <v-app>
-      <router-view />
-    </v-app>
+    <div class="flex-grow-1 d-flex flex-column">
+      <PCTopbar></PCTopbar>
+      <v-main>
+        <router-view />
+      </v-main>
+    </div>
   </v-app>
 </template>
 
 <script>
-import PCSidebar from '../src/components/ui/PCSidebar.vue'
-import PCTopbar from '../src/components/ui/PCTopbar.vue'
+import PCSidebar from '../src/components/ui/PCSidebar.vue';
+import PCTopbar from '../src/components/ui/PCTopbar.vue';
 
 export default {
   name: 'App',
@@ -20,16 +22,17 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .v-app {
   display: flex;
   flex-direction: row;
+  height: 100vh;
 }
 
-.main-content {
-  padding: 16px;
+.v-main {
   flex-grow: 1;
-  background: #f9f9f9;
-  height: calc(100vh - 67.5px);
+  display: flex;
+  flex-direction: column;
 }
 </style>
