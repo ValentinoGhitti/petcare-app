@@ -7,10 +7,10 @@
       height="450px"
       class="mt-9"
     ></v-skeleton-loader>
-    <v-card v-else height="420px" class="pa-4 mt-9">
+    <v-card v-else height="420px" class="pa-4 mt-8">
       <v-row class="d-flex justify-center">
         <v-col lg="7" class="d-flex align-center mb-6">
-          <span class="text-gray">VACCINATION  SCHEDULE</span>
+          <span class="text-gray">VACCINATION SCHEDULE</span>
         </v-col>
         <v-col lg="5" class="d-flex">
           <v-col>

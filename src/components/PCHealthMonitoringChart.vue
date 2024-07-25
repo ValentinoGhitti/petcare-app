@@ -24,7 +24,7 @@
     </v-row>
 
     <v-row class="d-flex justify-center mb-1">
-        <v-col lg="11" class="d-flex justify-center justify-between text-center twitter-buttons-border">
+        <v-col lg="11" class="d-flex justify-center justify-space-between text-center twitter-buttons-border">
           <v-chip class="ma-2" color="blue" label text-color="white">
             <v-icon left>mdi-heart-flash</v-icon>
             Stress level

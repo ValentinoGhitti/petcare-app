@@ -1,26 +1,26 @@
 <template>
-    <v-container fluid class="main-content">
-      <v-row>
-        <v-col md="7">
-            <v-row>
-              <v-col class="px-0" md="4">
-                <PCStatCard label="Activity" :value="25" color="primary" :loading="loading" />
-              </v-col>
-              <v-col class="px-0" md="4">
-                <PCStatCard label="Sleep" :value="79" color="success" :loading="loading" />
-              </v-col>
-              <v-col class="px-0" md="4">
-                <PCStatCard label="Wellness" :value="52" color="warning" :loading="loading" />
-              </v-col>
-            </v-row>
-            <PCHealthMonitoringChart :loading="loading" />
-        </v-col>
-        <v-col md="5">
-          <PCVaccinationSchedule :loading="loading" />
-          <PCChat :loading="loading" />
-        </v-col>
-      </v-row>
-    </v-container>
+  <v-container fluid class="main-content">
+    <v-row>
+      <v-col md="7">
+        <v-row>
+          <v-col class="px-0" md="4">
+            <PCStatCard label="ACTIVITY" :value="25" color="#E53761" :loading="loading" />
+          </v-col>
+          <v-col class="px-0" md="4">
+            <PCStatCard label="SLEEP" :value="79" color="#27A468" :loading="loading" />
+          </v-col>
+          <v-col class="px-0" md="4">
+            <PCStatCard label="WELLNESS" :value="52" color="#F2A735" :loading="loading" />
+          </v-col>
+        </v-row>
+        <PCHealthMonitoringChart :loading="loading" />
+      </v-col>
+      <v-col md="5">
+        <PCVaccinationSchedule :loading="loading" />
+        <PCChat :loading="loading" />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
