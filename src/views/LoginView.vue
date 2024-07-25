@@ -1,10 +1,9 @@
 <template>
-  <v-container fluid fill-height class="pa-0">
-    <v-row align="center" justify="center" class="fill-height ma-0">
+  <v-container fluid fill-height class="pa-0 full-height">
+    <v-row align="center" justify="center" class="fill-height ma-0 full-height">
       <v-col cols="12" class="fill-height pa-0">
-        <v-card class="elevation-6 fill-height pa-0">
-          <v-window v-model="step">
-
+        <v-card class="elevation-6 fill-height pa-0 full-height">
+          <v-window v-model="step" class="fill-height">
             <v-window-item :value="1">
               <v-row no-gutters class="fill-height ma-0 pa-0">
                 <v-col cols="12" md="6" class="pa-0 ma-0">
@@ -52,6 +51,19 @@
                           <v-btn color="blue" dark block tile @click="handleLogin">
                             Log in
                           </v-btn>
+                          <v-fade-transition>
+                            <v-col>
+                              <v-alert
+                                v-show="loginError"
+                                type="error"
+                                dismissible
+                                @click:close="clearError"
+                              >
+                                {{ loginError }}
+                              </v-alert>
+                            </v-col>
+
+                          </v-fade-transition>
                         </v-form>
                       </v-col>
                     </v-row>
@@ -94,6 +106,7 @@
                     </div>
                   </div>
                 </v-col>
+
                 <v-col cols="12" md="6" class="pa-0 ma-0">
                   <v-card-text class="mt-12">
                     <h4 class="text-center">Sign Up for an Account</h4>
@@ -152,12 +165,13 @@
                             <span class="caption blue--text ml-n4">Terms & Conditions</span>
                           </v-col>
                         </v-row>
-                        <v-btn color="blue" dark block tile>
+                        <v-btn color="blue" @click="handleRegister" dark block tile>
                           Sign up
                         </v-btn>
                       </v-col>
                     </v-row>
                   </v-card-text>
+
                 </v-col>
               </v-row>
             </v-window-item>
@@ -177,41 +191,83 @@ export default {
     email: '',
     password: '',
     valid: true,
+    loginError: '',
     emailRules: [
       v => !!v || 'Email is required',
       v => /.+@.+\..+/.test(v) || 'Email must be valid'
     ],
     passwordRules: [
       v => !!v || 'Password is required'
-    ]
+    ],
+    alertTimeout: null,
   }),
   props: {
     source: String
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(['login', 'register']),
     async handleLogin() {
       if (this.$refs.form.validate()) {
         try {
-          const token = 'tknPruebaVachu';
-          const user = { email: this.email };
-
-          await this.login({ token, user });
+          await this.login({ email: this.email, password: this.password });
           this.$router.push({ name: 'home' });
         } catch (error) {
           console.error('Error al hacer login:', error);
+          this.loginError = 'You need to register an account before you can log in.';
+          this.setAlertTimeout();
         }
       }
+    },
+    async handleRegister() {
+      if (this.$refs.form.validate()) {
+        try {
+          const user = { email: this.email, password: this.password };
+          await this.register(user);
+          this.step--;
+        } catch (error) {
+          console.error('Error al registrar usuario:', error);
+        }
+      }
+    },
+    setAlertTimeout() {
+      if (this.alertTimeout) {
+        clearTimeout(this.alertTimeout);
+      }
+      this.alertTimeout = setTimeout(() => {
+        this.loginError = '';
+      }, 2000);
+    },
+    clearError() {
+      this.loginError = '';
+      if (this.alertTimeout) {
+        clearTimeout(this.alertTimeout);
+      }
+    }
+  },
+  beforeDestroy() {
+    if (this.alertTimeout) {
+      clearTimeout(this.alertTimeout);
     }
   }
 };
 </script>
 
 <style scoped>
+.fill-height {
+  height: 100vh;
+}
+
 .v-application .rounded-bl-xl {
   border-bottom-left-radius: 300px !important;
 }
 .v-application .rounded-br-xl {
   border-bottom-right-radius: 300px !important;
+}
+
+.v-fade-transition-enter-active, .v-fade-transition-leave-active {
+  transition: opacity 0.5s;
+}
+.v-fade-transition-enter, .v-fade-transition-leave-to {
+  opacity: 0;
 }
 </style>

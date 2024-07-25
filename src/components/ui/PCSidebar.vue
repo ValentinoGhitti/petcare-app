@@ -16,7 +16,7 @@
       <v-list-item>
         <v-row align="center" no-gutters>
           <v-col>
-            <v-list-title class="ml-2">¡Bienvenido {{ userName }}!</v-list-title>
+            <v-list-item-title class="ml-2">¡Bienvenido {{ userName }}!</v-list-item-title>
           </v-col>
         </v-row>
       </v-list-item>
