@@ -15,10 +15,15 @@
 
     <v-list dense nav class="px-6">
       <v-subheader class="text-uppercase">Menu</v-subheader>
-      <v-list-item v-for="item in menuItems" :key="item.title" link>
+      <v-list-item
+        v-for="(item, index) in menuItems"
+        :key="item.title"
+        link
+        :class="{'primary-bg': index === 0}"
+      >
         <v-row align="center" no-gutters>
           <v-col cols="auto">
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon class="primary-icon">{{ item.icon }}</v-icon>
           </v-col>
           <v-col>
             <v-list-item-title class="ml-2">{{ item.title }}</v-list-item-title>
@@ -140,5 +145,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.primary-bg {
+  background-color: #3788E5 !important;
+  color: white !important;
+}
+
+.primary-bg .primary-icon {
+  color: white !important;
 }
 </style>
