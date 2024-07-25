@@ -78,7 +78,7 @@
       </v-list-item>
     </v-list>
 
-    <v-list dense nav class="mt-10 px-6">
+    <v-list dense nav class="mt-15 px-6">
       <v-list-item link>
         <v-row align="center" no-gutters>
           <v-col cols="auto">

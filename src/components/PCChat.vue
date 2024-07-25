@@ -7,7 +7,7 @@
       class="my-4 pt-6"
     ></v-skeleton-loader>
     <v-card v-else class="pa-4 mt-0">
-      <v-card-title class="headline">Chat</v-card-title>
+      <v-card-text>CHAT</v-card-text>
       <v-list>
         <v-list-item v-for="chat in chats" :key="chat.name">
           <v-badge :color="chat.color" class="mx-5 py-3" left dot></v-badge>
@@ -25,9 +25,8 @@
           </v-list-item-action>
         </v-list-item>
       </v-list>
-  </v-card>
+    </v-card>
   </v-container>
-
 </template>
 
 <script>
@@ -50,7 +49,6 @@ export default {
 
 <style scoped>
 .v-card {
-  margin: 16px;
   border-radius: 16px;
 }
 .v-list-item-title {

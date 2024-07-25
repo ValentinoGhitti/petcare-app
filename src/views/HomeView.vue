@@ -58,7 +58,7 @@ export default {
   padding: 16px;
   flex-grow: 1;
   background: #f9f9f9;
-  min-height: 100vh; /* Asegura que el contenedor ocupe al menos la altura del viewport */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }

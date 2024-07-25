@@ -1,32 +1,30 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-skeleton-loader
       v-if="loading"
       :loading="loading"
       type="card"
       class="my-8"
     ></v-skeleton-loader>
-    <v-card class="mt-8" v-else>
-      <v-card-text class="text-center">
-        <v-row>
-          <v-col class="d-flex align-center mb-6">
-            <span>ACTIVITY</span>
-          </v-col>
-          <v-col  >
-            <v-select
-              dense
-              label="Select"
-              :items="['Daily', 'Weekly', 'Monthly']"
-              outlined
-            ></v-select>
-          </v-col>
-        </v-row>
-        <apexchart type="radialBar" height="300" :options="chartOptions" :series="series"></apexchart>
-      </v-card-text>
+    <v-card class="mt-11 mx-0 mb-5" v-else>
+      <v-row>
+        <v-col class="d-flex align-center">
+          <v-card-text>ACTIVITY</v-card-text>
+        </v-col>
+        <v-col cols="12" md="5" xl="5" class="pr-2"> 
+          <v-select
+            dense
+            label="Select"
+            hide-details
+            :items="['Daily', 'Weekly', 'Monthly']"
+            outlined
+            class="mr-5"
+          ></v-select>
+        </v-col>
+      </v-row>
+      <apexchart type="radialBar" height="400" :options="chartOptions" :series="series"></apexchart>
     </v-card>
-  
   </v-container>
-
 </template>
 
 <script>
@@ -34,7 +32,7 @@ import VueApexCharts from 'vue-apexcharts';
 
 export default {
   props: {
-    loading: Boolean
+    loading: Boolean,
   },
   components: {
     apexchart: VueApexCharts,
@@ -44,18 +42,16 @@ export default {
       series: [70],
       chartOptions: {
         chart: {
-          height: 300,
+          height: 400,
           type: 'radialBar',
+        },
+        stroke: {
+          lineCap: 'round'
         },
         plotOptions: {
           radialBar: {
             hollow: {
-              size: '70%',
-            },
-            track: {
-              background: '#e0e0e0',
-              strokeWidth: '100%',
-              margin: 1,
+              size: '65%',
             },
             dataLabels: {
               show: true,

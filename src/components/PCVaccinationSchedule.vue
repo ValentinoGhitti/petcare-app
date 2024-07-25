@@ -5,13 +5,14 @@
       :loading="loading"
       type="table"
       height="450px"
+      class="mt-9"
     ></v-skeleton-loader>
-    <v-card v-else height="409px" class="pa-4 mt-8">
+    <v-card v-else height="420px" class="pa-4 mt-9">
       <v-row class="d-flex justify-center">
-        <v-col lg="5" class="d-flex align-center mb-6">
-          <span>ACTIVITY</span>
+        <v-col lg="7" class="d-flex align-center mb-6">
+          <span class="text-gray">VACCINATION  SCHEDULE</span>
         </v-col>
-        <v-col lg="7" class="d-flex">
+        <v-col lg="5" class="d-flex">
           <v-col>
             <v-icon left>
               mdi-magnify
@@ -38,6 +39,7 @@
               <td>{{ item.name }}</td>
               <td>
                 <v-chip
+                  label
                   :class="['chip-fixed-size', getStatusClass(item.type)]"
                   text-color="dark"
                 >{{ item.type }}</v-chip>
@@ -45,10 +47,10 @@
               <td>{{ item.date }}</td>
               <td>
                 <v-chip
-                  :color="item.veterinarian === 'Find veterinarian' ? 'primary' : 'white'"
+                  label
+                  :color="item.veterinarian === 'Find veterinarian' ? 'blue' : 'transparent'"
                   :text-color="item.veterinarian === 'Find veterinarian' ? 'white' : 'black'"
-                  outlined
-                  class="chip-fixed-size"
+                  class="chip-fixed-size pl-1"
                 >{{ item.veterinarian }}</v-chip>
               </td>
             </tr>
@@ -98,8 +100,7 @@ export default {
 </script>
 
 <style>
-.v-card {
-  margin: 16px;
+.v-card .v-sheet {
   border-radius: 16px;
   padding-bottom: 0px ;
 }
@@ -135,25 +136,27 @@ td {
   justify-content: center;
   align-items: center;
   font-size: 14px;
+  border-radius: 12px;
+}
+
+.v-text-field--outlined fieldset  {
+  border: 1px solid #DAE3F8 !important;
+  border-radius: 4px;
 }
 
 .chip-overdue {
-  background-color: #F44336 !important;
-  color: white !important;
+  background-color: #F7C1CE !important;
+  color: #D03258 !important;
 }
 
 .chip-noncore {
-  background-color: #FFEB3B !important;
-  color: black !important;
+  background-color: #F7E1C1 !important;
+  color: #F2A735 !important;
 }
 
 .chip-core {
-  background-color: #4CAF50 !important;
-  color: white !important;
+  background-color: #BDE8D3 !important;
+  color: #27A468 !important;
 }
 
-.chip-default {
-  background-color: #E0E0E0 !important;
-  color: black !important;
-}
 </style>

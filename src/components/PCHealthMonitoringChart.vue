@@ -1,5 +1,5 @@
 <template>
-  <v-container class="test">
+  <v-card >
     <v-skeleton-loader
       v-if="loading"
       :loading="loading"
@@ -8,14 +8,15 @@
     ></v-skeleton-loader>
     <div v-else>
     
-      <v-row class="d-flex justify-center">
-      <v-col lg="5" class="d-flex align-center mb-6">
-        <span>ACTIVITY</span>
+    <v-row class="d-flex justify-center">
+      <v-col lg="8" class="d-flex align-center px-0 mb-6">
+        <v-card-text>HEALTH MONITORING</v-card-text>
       </v-col>
-      <v-col lg="5">
+      <v-col lg="3">
         <v-select
           dense
           label="Select"
+          class="px-0"
           :items="['Daily', 'Weekly', 'Monthly']"
           outlined
         ></v-select>
@@ -23,25 +24,26 @@
     </v-row>
 
     <v-row class="d-flex justify-center mb-1">
-      <v-col lg="10" class="d-flex justify-center justify-between text-center twitter-buttons-border">
-        <v-chip class="ma-2" color="cyan" label text-color="white">
-          <v-icon left>mdi-twitter</v-icon>
-          New Tweets
-        </v-chip>
-        <v-chip class="ma-2" color="cyan" label text-color="white">
-          <v-icon left>mdi-twitter</v-icon>
-          New Tweets
-        </v-chip>
-        <v-chip class="ma-2" color="cyan" label text-color="white">
-          <v-icon left>mdi-twitter</v-icon>
-          New Tweets
-        </v-chip>
-        <v-chip class="ma-2" color="cyan" label text-color="white">
-          <v-icon left>mdi-twitter</v-icon>
-          New Tweets
-        </v-chip>
-      </v-col>
+        <v-col lg="11" class="d-flex justify-center justify-between text-center twitter-buttons-border">
+          <v-chip class="ma-2" color="blue" label text-color="white">
+            <v-icon left>mdi-heart-flash</v-icon>
+            Stress level
+          </v-chip>
+          <v-chip class="ma-2" color="transparent" label text-color="grey-lighten-5">
+            <v-icon left>mdi-pulse</v-icon>
+            Pulse
+          </v-chip>
+          <v-chip class="ma-2" color="transparent" label text-color="grey-lighten-5">
+            <v-icon left>mdi-thermometer</v-icon>
+            Temperature
+          </v-chip>
+          <v-chip class="ma-2" color="transparent" label text-color="grey-lighten-5">
+            <v-icon left>mdi-fire</v-icon>
+            Calories burned
+          </v-chip>
+        </v-col>
     </v-row>
+
 
     <v-row>
       <v-col lg="12" class="chart-container">
@@ -52,7 +54,7 @@
     
     </div>
 
-  </v-container>
+  </v-card>
 </template>
 
 <script>
@@ -157,12 +159,9 @@ export default {
   height: 100%;
   min-height: 350px;
 }
-.test {
-  background-color: rgb(217, 20, 20);
-  border-radius: 1%;
-}
+
 .twitter-buttons-border {
-  border: 1px solid rgb(141, 141, 141);
+  border: 1px solid #DAE3F8;
   border-radius: 8px;
   padding: 2px;
   padding-left: 1px;
