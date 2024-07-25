@@ -29,7 +29,7 @@
               <v-btn
                 icon
                 border
-                outline
+                outlined
                 color="primary"
                 class="white--text"
                 v-bind="attrs"

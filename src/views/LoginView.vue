@@ -1,9 +1,10 @@
 <template>
   <v-container fluid fill-height class="pa-0">
     <v-row align="center" justify="center" class="fill-height ma-0">
-      <v-col cols="12" sm="12" class="fill-height pa-0">
+      <v-col cols="12" class="fill-height pa-0">
         <v-card class="elevation-6 fill-height pa-0">
           <v-window v-model="step">
+
             <v-window-item :value="1">
               <v-row no-gutters class="fill-height ma-0 pa-0">
                 <v-col cols="12" md="6" class="pa-0 ma-0">
@@ -16,6 +17,7 @@
                     <v-row align="center" justify="center">
                       <v-col cols="12" sm="8">
                         <v-text-field
+                          v-model="email"
                           label="Email"
                           outlined
                           dense
@@ -24,6 +26,7 @@
                           class="mt-16"
                         />
                         <v-text-field
+                          v-model="password"
                           label="Password"
                           outlined
                           dense
@@ -43,33 +46,19 @@
                             <span class="caption blue--text">Forgot password</span>
                           </v-col>
                         </v-row>
-                        <v-btn color="blue" dark block tile>
+                        <v-btn color="blue" dark block tile @click="handleLogin">
                           Log in
                         </v-btn>
-                        <h5 class="text-center grey--text mt-4 mb-3">
-                          Or Log in using
-                        </h5>
-                        <div class="d-flex justify-space-between align-center mx-10 mb-16">
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="red">fab fa-google</v-icon>
-                          </v-btn>
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="blue">fab fa-facebook-f</v-icon>
-                          </v-btn>
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="light-blue lighten-3">fab fa-twitter</v-icon>
-                          </v-btn>
-                        </div>
                       </v-col>
                     </v-row>
                   </v-card-text>
                 </v-col>
                 <v-col cols="12" md="6" class="blue rounded-bl-xl fill-height pa-0 ma-0">
-                  <div style="text-align: center; padding: 180px 0;">
+                  <div style="text-align: center; padding: 210px 0;">
                     <v-card-text class="white--text">
                       <h3 class="text-center">Don't Have an Account Yet?</h3>
                       <h6 class="text-center">
-                        Let's get you all set up so you can start creating your your first<br>
+                        Let's get you all set up so you can start creating your first<br>
                         onboarding experience
                       </h6>
                     </v-card-text>
@@ -82,10 +71,11 @@
                 </v-col>
               </v-row>
             </v-window-item>
+
             <v-window-item :value="2">
               <v-row no-gutters class="fill-height ma-0 pa-0">
                 <v-col cols="12" md="6" class="blue rounded-br-xl fill-height pa-0 ma-0">
-                  <div style="text-align: center; padding: 180px 0;">
+                  <div style="text-align: center; padding: 210px 0;">
                     <v-card-text class="white--text">
                       <h3 class="text-center">Already Signed up?</h3>
                       <h6 class="text-center">
@@ -161,20 +151,6 @@
                         <v-btn color="blue" dark block tile>
                           Sign up
                         </v-btn>
-                        <h5 class="text-center grey--text mt-4 mb-3">
-                          Or Sign up using
-                        </h5>
-                        <div class="d-flex justify-space-between align-center mx-10 mb-11">
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="red">fab fa-google</v-icon>
-                          </v-btn>
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="blue">fab fa-facebook-f</v-icon>
-                          </v-btn>
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="light-blue lighten-3">fab fa-twitter</v-icon>
-                          </v-btn>
-                        </div>
                       </v-col>
                     </v-row>
                   </v-card-text>
@@ -189,12 +165,30 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   data: () => ({
-    step: 1
+    step: 1,
+    email: '',
+    password: ''
   }),
   props: {
     source: String
+  },
+  methods: {
+    ...mapActions(['login']),
+    async handleLogin() {
+      try {
+        const token = 'tknPruebaVachu';
+        const user = { email: this.email };
+
+        await this.login({ token, user });
+        this.$router.push({ name: 'home' });
+      } catch (error) {
+        console.error('error al hacer login:', error);
+      }
+    }
   }
 };
 </script>

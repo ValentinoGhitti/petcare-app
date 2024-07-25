@@ -84,7 +84,7 @@
     </v-list>
 
     <v-list dense nav class="mt-15 px-6">
-      <v-list-item link>
+      <v-list-item link @click="handleLogout">
         <v-row align="center" no-gutters>
           <v-col cols="auto">
             <v-icon class="red--text">mdi-logout</v-icon>
@@ -99,6 +99,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'PCSidebar',
   data() {
@@ -121,6 +123,14 @@ export default {
       ],
     };
   },
+  methods: {
+    ...mapActions(['logout']),
+    async handleLogout() {
+      await this.logout();
+      localStorage.removeItem('authToken');
+      this.$router.push({ name: 'login' });
+    }
+  }
 };
 </script>
 
