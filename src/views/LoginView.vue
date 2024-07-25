@@ -16,39 +16,43 @@
                     </h6>
                     <v-row align="center" justify="center">
                       <v-col cols="12" sm="8">
-                        <v-text-field
-                          v-model="email"
-                          label="Email"
-                          outlined
-                          dense
-                          color="blue"
-                          autocomplete="false"
-                          class="mt-16"
-                        />
-                        <v-text-field
-                          v-model="password"
-                          label="Password"
-                          outlined
-                          dense
-                          color="blue"
-                          autocomplete="false"
-                          type="password"
-                        />
-                        <v-row>
-                          <v-col cols="12" sm="7">
-                            <v-checkbox
-                              label="Remember Me"
-                              class="mt-n1"
-                              color="blue"
-                            ></v-checkbox>
-                          </v-col>
-                          <v-col cols="12" sm="5">
-                            <span class="caption blue--text">Forgot password</span>
-                          </v-col>
-                        </v-row>
-                        <v-btn color="blue" dark block tile @click="handleLogin">
-                          Log in
-                        </v-btn>
+                        <v-form ref="form" v-model="valid">
+                          <v-text-field
+                            v-model="email"
+                            label="Email"
+                            outlined
+                            dense
+                            color="blue"
+                            :rules="emailRules"
+                            autocomplete="false"
+                            class="mt-16"
+                          />
+                          <v-text-field
+                            v-model="password"
+                            label="Password"
+                            outlined
+                            dense
+                            color="blue"
+                            :rules="passwordRules"
+                            autocomplete="false"
+                            type="password"
+                          />
+                          <v-row>
+                            <v-col cols="12" sm="7">
+                              <v-checkbox
+                                label="Remember Me"
+                                class="mt-n1"
+                                color="blue"
+                              ></v-checkbox>
+                            </v-col>
+                            <v-col cols="12" sm="5">
+                              <span class="caption blue--text">Forgot password</span>
+                            </v-col>
+                          </v-row>
+                          <v-btn color="blue" dark block tile @click="handleLogin">
+                            Log in
+                          </v-btn>
+                        </v-form>
                       </v-col>
                     </v-row>
                   </v-card-text>
@@ -171,7 +175,15 @@ export default {
   data: () => ({
     step: 1,
     email: '',
-    password: ''
+    password: '',
+    valid: true,
+    emailRules: [
+      v => !!v || 'Email is required',
+      v => /.+@.+\..+/.test(v) || 'Email must be valid'
+    ],
+    passwordRules: [
+      v => !!v || 'Password is required'
+    ]
   }),
   props: {
     source: String
@@ -179,14 +191,16 @@ export default {
   methods: {
     ...mapActions(['login']),
     async handleLogin() {
-      try {
-        const token = 'tknPruebaVachu';
-        const user = { email: this.email };
+      if (this.$refs.form.validate()) {
+        try {
+          const token = 'tknPruebaVachu';
+          const user = { email: this.email };
 
-        await this.login({ token, user });
-        this.$router.push({ name: 'home' });
-      } catch (error) {
-        console.error('error al hacer login:', error);
+          await this.login({ token, user });
+          this.$router.push({ name: 'home' });
+        } catch (error) {
+          console.error('Error al hacer login:', error);
+        }
       }
     }
   }

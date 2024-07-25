@@ -12,6 +12,16 @@
         </v-row>
       </v-list-item-content>
     </v-list-item>
+    <v-list dense nav class="px-6">
+      <v-list-item>
+        <v-row align="center" no-gutters>
+          <v-col>
+            <v-list-title class="ml-2">¡Bienvenido {{ userName }}!</v-list-title>
+          </v-col>
+        </v-row>
+      </v-list-item>
+    </v-list>
+    <v-divider class="small-divider mt-5 custom-divider"></v-divider>
 
     <v-list dense nav class="px-6">
       <v-subheader class="text-uppercase">Menu</v-subheader>
@@ -99,7 +109,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'PCSidebar',
@@ -122,6 +132,12 @@ export default {
         { title: 'Documentation', icon: 'mdi-file-document-outline' },
       ],
     };
+  },
+  computed: {
+    ...mapGetters(['user']),
+    userName() {
+      return this.user ? this.user.email.split('@')[0] : '';
+    }
   },
   methods: {
     ...mapActions(['logout']),
@@ -158,7 +174,7 @@ export default {
 }
 
 .primary-bg {
-  background-color: #3788E5 !important;
+  background-color: #2196F3 !important;
   color: white !important;
 }
 

@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isAuthenticated: !!localStorage.getItem('authToken'),
-    user: null
+    user: JSON.parse(localStorage.getItem('user')) || null
   },
   mutations: {
     SET_AUTHENTICATED(state, isAuthenticated) {
@@ -19,11 +19,13 @@ export default new Vuex.Store({
   actions: {
     login({ commit }, { token, user }) {
       localStorage.setItem('authToken', token);
+      localStorage.setItem('user', JSON.stringify(user));
       commit('SET_AUTHENTICATED', true);
       commit('SET_USER', user);
     },
     logout({ commit }) {
       localStorage.removeItem('authToken');
+      localStorage.removeItem('user');
       commit('SET_AUTHENTICATED', false);
       commit('SET_USER', null);
     }
