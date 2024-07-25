@@ -4,7 +4,7 @@
       v-if="loading"
       :loading="loading"
       type="table-heading, list-item-avatar, list-item-avatar, list-item-avatar, list-item-avatar"
-      class="my-4 pt-6"
+      class="my-4"
     ></v-skeleton-loader>
     <v-card v-else class="pa-4 mt-0">
       <v-card-text>CHAT</v-card-text>

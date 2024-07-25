@@ -7,7 +7,7 @@
       class="my-8"
     ></v-skeleton-loader>
     <v-card class="mt-11 mx-0 mb-5" v-else>
-      <v-row class="d-flex justify-space-between">
+      <v-row>
         <v-col class="d-flex align-center">
           <v-card-text>{{ label }}</v-card-text>
         </v-col>

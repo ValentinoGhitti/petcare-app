@@ -10,7 +10,7 @@
             <PCStatCard label="SLEEP" :value="79" color="#27A468" :loading="loading" />
           </v-col>
           <v-col class="px-0" md="4">
-            <PCStatCard label="WELLNESS" :value="52" color="#F2A735" :loading="loading" />
+            <PCStatCard label="WELNES" :value="52" color="#F2A735" :loading="loading" />
           </v-col>
         </v-row>
         <PCHealthMonitoringChart :loading="loading" />
@@ -30,7 +30,7 @@ import PCVaccinationSchedule from '../components/PCVaccinationSchedule.vue';
 import PCChat from '../components/PCChat.vue';
 
 export default {
-  name: 'HomeView',
+  name: 'DashboardView',
   components: {
     PCStatCard,
     PCHealthMonitoringChart,

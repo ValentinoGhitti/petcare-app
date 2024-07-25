@@ -1,8 +1,8 @@
 <template>
   <v-app class="d-flex flex-row">
-    <PCSidebar></PCSidebar>
+    <PCSidebar v-if="!isLoginPage"></PCSidebar>
     <div class="flex-grow-1 d-flex flex-column">
-      <PCTopbar></PCTopbar>
+      <PCTopbar v-if="!isLoginPage"></PCTopbar>
       <v-main>
         <router-view />
       </v-main>
@@ -20,6 +20,11 @@ export default {
     PCSidebar,
     PCTopbar,
   },
+  computed: {
+    isLoginPage() {
+      return this.$route.path === '/login';
+    }
+  }
 };
 </script>
 

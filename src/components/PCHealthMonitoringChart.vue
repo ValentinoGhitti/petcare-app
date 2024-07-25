@@ -24,7 +24,7 @@
     </v-row>
 
     <v-row class="d-flex justify-center mb-1">
-        <v-col lg="11" class="d-flex justify-center justify-space-between text-center twitter-buttons-border">
+        <v-col lg="11" class="d-flex justify-center justify-space-between text-center buttons-border">
           <v-chip class="ma-2" color="blue" label text-color="white">
             <v-icon left>mdi-heart-flash</v-icon>
             Stress level
@@ -43,17 +43,12 @@
           </v-chip>
         </v-col>
     </v-row>
-
-
     <v-row>
       <v-col lg="12" class="chart-container">
         <apexchart type="area" height="300" :options="chartOptions" :series="series"></apexchart>
       </v-col>
     </v-row>
-    
-    
     </div>
-
   </v-card>
 </template>
 
@@ -160,7 +155,7 @@ export default {
   min-height: 350px;
 }
 
-.twitter-buttons-border {
+.buttons-border {
   border: 1px solid #DAE3F8;
   border-radius: 8px;
   padding: 2px;
