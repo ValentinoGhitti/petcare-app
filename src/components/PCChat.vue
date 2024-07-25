@@ -1,29 +1,40 @@
 <template>
-  
-  <v-card class="pa-4">
-    <v-card-title class="headline">Chat</v-card-title>
-    <v-list>
-      <v-list-item v-for="chat in chats" :key="chat.name">
-        <v-badge :color="chat.color" class="mx-5 py-3" left dot></v-badge>
-        <v-list-item-content>
-          <v-list-item-title>{{ chat.name }}</v-list-item-title>
-          <v-list-item-subtitle>{{ chat.message }}</v-list-item-subtitle>
-        </v-list-item-content>
-        <v-list-item-action>
-          <span>{{ chat.time }}</span>
-          <v-chip
-            v-if="chat.unread"
-            class="notification-chip ml-2"
-            label
-          >{{ chat.unread }}</v-chip>
-        </v-list-item-action>
-      </v-list-item>
-    </v-list>
+  <v-container>
+    <v-skeleton-loader
+      v-if="loading"
+      :loading="loading"
+      type="table-heading, list-item-avatar, list-item-avatar, list-item-avatar, list-item-avatar"
+      class="my-4 pt-6"
+    ></v-skeleton-loader>
+    <v-card v-else class="pa-4 mt-0">
+      <v-card-title class="headline">Chat</v-card-title>
+      <v-list>
+        <v-list-item v-for="chat in chats" :key="chat.name">
+          <v-badge :color="chat.color" class="mx-5 py-3" left dot></v-badge>
+          <v-list-item-content>
+            <v-list-item-title>{{ chat.name }}</v-list-item-title>
+            <v-list-item-subtitle>{{ chat.message }}</v-list-item-subtitle>
+          </v-list-item-content>
+          <v-list-item-action>
+            <span>{{ chat.time }}</span>
+            <v-chip
+              v-if="chat.unread"
+              class="notification-chip ml-2"
+              label
+            >{{ chat.unread }}</v-chip>
+          </v-list-item-action>
+        </v-list-item>
+      </v-list>
   </v-card>
+  </v-container>
+
 </template>
 
 <script>
 export default {
+  props: {
+    loading: Boolean
+  },
   data() {
     return {
       chats: [

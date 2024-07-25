@@ -1,6 +1,14 @@
 <template>
-  <v-container class="test py-0">
-    <v-row class="d-flex justify-center">
+  <v-container class="test">
+    <v-skeleton-loader
+      v-if="loading"
+      :loading="loading"
+      type="table-heading, list-item-two-line, image"
+      height="450px"
+    ></v-skeleton-loader>
+    <div v-else>
+    
+      <v-row class="d-flex justify-center">
       <v-col lg="5" class="d-flex align-center mb-6">
         <span>ACTIVITY</span>
       </v-col>
@@ -13,37 +21,37 @@
         ></v-select>
       </v-col>
     </v-row>
+
     <v-row class="d-flex justify-center mb-1">
       <v-col lg="10" class="d-flex justify-center justify-between text-center twitter-buttons-border">
         <v-chip class="ma-2" color="cyan" label text-color="white">
-          <v-icon left>
-            mdi-twitter
-          </v-icon>
+          <v-icon left>mdi-twitter</v-icon>
           New Tweets
         </v-chip>
         <v-chip class="ma-2" color="cyan" label text-color="white">
-          <v-icon left>
-            mdi-twitter
-          </v-icon>
+          <v-icon left>mdi-twitter</v-icon>
           New Tweets
         </v-chip>
         <v-chip class="ma-2" color="cyan" label text-color="white">
-          <v-icon left>
-            mdi-twitter
-          </v-icon>
+          <v-icon left>mdi-twitter</v-icon>
           New Tweets
         </v-chip>
         <v-chip class="ma-2" color="cyan" label text-color="white">
-          <v-icon left>
-            mdi-twitter
-          </v-icon>
+          <v-icon left>mdi-twitter</v-icon>
           New Tweets
         </v-chip>
       </v-col>
     </v-row>
-    <div class="chart-container">
-      <apexchart type="area" height="350" :options="chartOptions" :series="series"></apexchart>
+
+    <v-row>
+      <v-col lg="12" class="chart-container">
+        <apexchart type="area" height="300" :options="chartOptions" :series="series"></apexchart>
+      </v-col>
+    </v-row>
+    
+    
     </div>
+
   </v-container>
 </template>
 
@@ -51,6 +59,9 @@
 import VueApexCharts from 'vue-apexcharts';
 
 export default {
+  props: {
+    loading: Boolean
+  },
   components: {
     apexchart: VueApexCharts,
   },
@@ -147,7 +158,8 @@ export default {
   min-height: 350px;
 }
 .test {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(217, 20, 20);
+  border-radius: 1%;
 }
 .twitter-buttons-border {
   border: 1px solid rgb(141, 141, 141);
