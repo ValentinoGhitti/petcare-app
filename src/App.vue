@@ -1,8 +1,8 @@
 <template>
   <v-app class="d-flex flex-row">
-    <PCSidebar v-if="!isLoginPage"></PCSidebar>
+    <PCSidebar v-if="!shouldHideSidebarAndTopbar"></PCSidebar>
     <div class="flex-grow-1 d-flex flex-column">
-      <PCTopbar v-if="!isLoginPage"></PCTopbar>
+      <PCTopbar v-if="!shouldHideSidebarAndTopbar"></PCTopbar>
       <v-main>
         <router-view />
       </v-main>
@@ -21,8 +21,8 @@ export default {
     PCTopbar,
   },
   computed: {
-    isLoginPage() {
-      return this.$route.path === '/login';
+    shouldHideSidebarAndTopbar() {
+      return this.$route.meta.hideSidebarAndTopbar;
     }
   }
 };

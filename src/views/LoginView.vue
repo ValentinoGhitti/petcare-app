@@ -74,8 +74,9 @@
                 </v-col>
                 <!-- Columna para el mensaje de registro -->
                 <v-col cols="12" md="6" class="blue rounded-bl-xl fill-height pa-0 ma-0">
-                  <div style="text-align: center; padding: 210px 0;">
+                  <div style="text-align: center; padding: 130px 0;">
                     <v-card-text class="white--text">
+                      <img src="../../public/img/pc-logo-login.png" height="120" alt="logo">
                       <h2 class="text-center">Don't Have an Account Yet?</h2><br>
                       <h4 class="text-center">
                         Let’s set it up so you can start caring for your pets.<br>
@@ -96,8 +97,9 @@
             <v-window-item :value="2">
               <v-row no-gutters class="fill-height ma-0 pa-0">
                 <v-col cols="12" md="6" class="blue rounded-br-xl fill-height pa-0 ma-0">
-                  <div style="text-align: center; padding: 210px 0;">
+                  <div style="text-align: center; padding: 130px 0;">
                     <v-card-text class="white--text">
+                      <img src="../../public/img/pc-logo-signup.png" height="120" alt="logo">
                       <h2 class="text-center">Log in to manage your PetCare.</h2><br>
                       <h4 class="text-center">
                         Log in to your account so you can continue <br>

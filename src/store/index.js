@@ -19,6 +19,13 @@ export default new Vuex.Store({
     ADD_USER(state, user) {
       state.users.push(user);
       localStorage.setItem('users', JSON.stringify(state.users));
+    },
+    UPDATE_USER_PASSWORD(state, { email, newPassword }) {
+      const user = state.users.find(user => user.email === email);
+      if (user) {
+        user.password = newPassword;
+        localStorage.setItem('users', JSON.stringify(state.users));
+      }
     }
   },
   actions: {
@@ -28,7 +35,7 @@ export default new Vuex.Store({
     login({ commit, state }, { email, password }) {
       const user = state.users.find(u => u.email === email && u.password === password);
       if (user) {
-        const token = 'someRandomToken';  // Generate a token here
+        const token = 'someRandomToken';
         localStorage.setItem('authToken', token);
         localStorage.setItem('user', JSON.stringify(user));
         commit('SET_AUTHENTICATED', true);
@@ -42,6 +49,15 @@ export default new Vuex.Store({
       localStorage.removeItem('user');
       commit('SET_AUTHENTICATED', false);
       commit('SET_USER', null);
+    },
+    resetPasswordAction({ commit, state }, { email, newPassword }) {
+      const userExists = state.users.some(user => user.email === email);
+      if (userExists) {
+        commit('UPDATE_USER_PASSWORD', { email, newPassword });
+        console.log('Password updated successfully');
+      } else {
+        console.log('Email not found');
+      }
     }
   },
   getters: {

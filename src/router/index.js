@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import DashboardView from '../views/DashboardView.vue';
 import LoginView from '../views/LoginView.vue';
+import ResetPasswordView from '@/views/ResetPasswordView.vue';
 import store from '../store';
 
 Vue.use(VueRouter);
@@ -16,7 +17,14 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: LoginView
+    component: LoginView,
+    meta: { hideSidebarAndTopbar: true }
+  },
+  {
+    path: '/reset-password',
+    name: 'password',
+    component: ResetPasswordView,
+    meta: { hideSidebarAndTopbar: true }
   }
 ];
 
