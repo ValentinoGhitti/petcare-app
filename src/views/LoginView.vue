@@ -21,6 +21,7 @@
                             label="Email"
                             outlined
                             dense
+                            prepend-inner-icon="mdi-email"
                             color="blue"
                             :rules="emailRules"
                             autocomplete="false"
@@ -31,6 +32,7 @@
                             label="Password"
                             outlined
                             dense
+                            prepend-inner-icon="mdi-lock"
                             color="blue"
                             :rules="passwordRules"
                             autocomplete="false"
@@ -45,9 +47,12 @@
                               ></v-checkbox>
                             </v-col>
                             <v-col cols="12" sm="5">
-                              <span class="caption blue--text">Forgot password</span>
+                              <a click class="caption blue--text click" @click="handleForgotPassword">Forgot password</a>
                             </v-col>
                           </v-row>
+                          <v-alert v-if="errorMessage" type="error" class="my-0" border="left" color="red">
+                            {{ errorMessage }}
+                          </v-alert>
                           <v-btn color="blue" dark block tile @click="handleLogin">
                             Log in
                           </v-btn>
@@ -145,15 +150,12 @@
                           type="password"
                         />
                         <v-row>
-                          <v-col cols="12" sm="7">
+                          <v-col cols="12" sm="12">
                             <v-checkbox
-                              label="I Accept AAE"
+                              label="I agree to the terms and conditions."
                               class="mt-n1"
                               color="blue"
                             ></v-checkbox>
-                          </v-col>
-                          <v-col cols="12" sm="5">
-                            <span class="caption blue--text ml-n4">Terms & Conditions</span>
                           </v-col>
                         </v-row>
                         <v-btn color="blue" @click="handleRegister" dark block tile>
@@ -183,6 +185,7 @@ export default {
     firstName: '',
     lastName: '',
     valid: true,
+    errorMessage: '',
     emailRules: [
       v => !!v || 'Email is required',
       v => /.+@.+\..+/.test(v) || 'Email must be valid'
@@ -201,8 +204,14 @@ export default {
         try {
           await this.login({ email: this.email, password: this.password });
           this.$router.push({ name: 'home' });
+          this.errorMessage = '';
         } catch (error) {
           console.error('Error al hacer login:', error);
+          this.errorMessage = 'Invalid credentials. Please check your email and password and try again.'; 
+
+          setTimeout(() => {
+            this.errorMessage = '';
+          }, 3000);
         }
       }
     },
@@ -215,8 +224,16 @@ export default {
           this.resetForm();
         } catch (error) {
           console.error('Error al registrar usuario:', error);
+          this.errorMessage = 'Error al registrar';
+
+          setTimeout(() => {
+            this.errorMessage = '';
+          }, 3000);
         }
       }
+    },
+    handleForgotPassword() {
+      this.$router.push('/reset-password');
     },
     resetForm() {
       this.email = '';
