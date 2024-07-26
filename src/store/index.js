@@ -50,13 +50,13 @@ export default new Vuex.Store({
       commit('SET_AUTHENTICATED', false);
       commit('SET_USER', null);
     },
-    resetPasswordAction({ commit, state }, { email, newPassword }) {
+    async resetPasswordAction({ commit, state }, { email, newPassword }) {
       const userExists = state.users.some(user => user.email === email);
       if (userExists) {
         commit('UPDATE_USER_PASSWORD', { email, newPassword });
-        console.log('Password updated successfully');
+        return true;
       } else {
-        console.log('Email not found');
+        return false;
       }
     }
   },
