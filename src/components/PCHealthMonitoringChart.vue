@@ -1,5 +1,5 @@
 <template>
-  <v-card >
+  <v-card>
     <v-skeleton-loader
       v-if="loading"
       :loading="loading"
@@ -7,53 +7,78 @@
       height="450px"
     ></v-skeleton-loader>
     <div v-else>
-    
-    <v-row class="d-flex justify-center">
-      <v-col lg="8" class="d-flex align-center px-0 mb-6">
-        <v-card-text>HEALTH MONITORING</v-card-text>
-      </v-col>
-      <v-col lg="3">
-        <v-select
-          dense
-          label="Select"
-          class="px-0"
-          :items="['Daily', 'Weekly', 'Monthly']"
-          outlined
-        ></v-select>
-      </v-col>
-    </v-row>
+      <v-row class="d-flex justify-center">
+        <v-col lg="8" class="d-flex align-center px-0 mb-6">
+          <v-card-text>HEALTH MONITORING</v-card-text>
+        </v-col>
+        <v-col lg="3">
+          <v-select
+            dense
+            label="Select"
+            class="px-0"
+            :items="['Daily', 'Weekly', 'Monthly']"
+            outlined
+          ></v-select>
+        </v-col>
+      </v-row>
 
-    <v-row class="d-flex justify-center mb-1">
+      <v-row class="d-flex justify-center mb-1">
         <v-col lg="11" class="d-flex justify-center justify-space-between text-center buttons-border">
-          <v-chip class="ma-2" color="blue" label text-color="white">
+          <v-chip
+            class="ma-2"
+            :color="activeButton === 'stressLevel' ? 'blue' : 'transparent'"
+            :text-color="activeButton === 'stressLevel' ? 'white' : 'grey-lighten-5'"
+            label
+            @click="setActiveButton('stressLevel')"
+          >
             <v-icon left>mdi-heart-flash</v-icon>
             Stress level
           </v-chip>
-          <v-chip class="ma-2" color="transparent" label text-color="grey-lighten-5">
+          <v-chip
+            class="ma-2"
+            :color="activeButton === 'pulse' ? 'blue' : 'transparent'"
+            :text-color="activeButton === 'pulse' ? 'white' : 'grey-lighten-5'"
+            label
+            @click="setActiveButton('pulse')"
+          >
             <v-icon left>mdi-pulse</v-icon>
             Pulse
           </v-chip>
-          <v-chip class="ma-2" color="transparent" label text-color="grey-lighten-5">
+          <v-chip
+            class="ma-2"
+            :color="activeButton === 'temperature' ? 'blue' : 'transparent'"
+            :text-color="activeButton === 'temperature' ? 'white' : 'grey-lighten-5'"
+            label
+            @click="setActiveButton('temperature')"
+          >
             <v-icon left>mdi-thermometer</v-icon>
             Temperature
           </v-chip>
-          <v-chip class="ma-2" color="transparent" label text-color="grey-lighten-5">
+          <v-chip
+            class="ma-2"
+            :color="activeButton === 'caloriesBurned' ? 'blue' : 'transparent'"
+            :text-color="activeButton === 'caloriesBurned' ? 'white' : 'grey-lighten-5'"
+            label
+            @click="setActiveButton('caloriesBurned')"
+          >
             <v-icon left>mdi-fire</v-icon>
             Calories burned
           </v-chip>
         </v-col>
-    </v-row>
-    <v-row>
-      <v-col lg="12" class="chart-container">
-        <apexchart type="area" height="300" :options="chartOptions" :series="series"></apexchart>
-      </v-col>
-    </v-row>
+      </v-row>
+
+      <v-row>
+        <v-col lg="12" class="chart-container">
+          <apexchart type="area" height="300" :options="chartOptions" :series="[{ name: 'Activity', data: series }]"></apexchart>
+        </v-col>
+      </v-row>
     </div>
   </v-card>
 </template>
 
 <script>
 import VueApexCharts from 'vue-apexcharts';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   props: {
@@ -64,10 +89,7 @@ export default {
   },
   data() {
     return {
-      series: [{
-        name: "Activity",
-        data: [1, 1.5, 2.2, 1.6, 2.8, 2.5, 2.9, 1.9, 1.9, 1.9, 2, 2.4, 3.5, 2.6, 3.9, 5, 6, 5, 4.2, 4, 3.4, 2.9, 1.8, 2, 2.4, 3.3]
-      }],
+      activeButton: 'stressLevel', // Valor por defecto
       chartOptions: {
         chart: {
           type: 'area',
@@ -108,7 +130,7 @@ export default {
           categories: [
             '', 'September', '', '', '', '', '', '',
             'November', '', '', '', '', '', '', '',
-            'December', '', '', '', '', '', '', '',
+            'December',
             'January'
           ],
           labels: {
@@ -138,6 +160,19 @@ export default {
           horizontalAlign: 'left'
         }
       }
+    };
+  },
+  computed: {
+    ...mapGetters('petcare', ['currentChartData']),
+    series() {
+      return this.currentChartData;
+    }
+  },
+  methods: {
+    ...mapActions('petcare', ['updateChart']),
+    setActiveButton(button) {
+      this.activeButton = button;
+      this.updateChart(button);
     }
   },
   mounted() {

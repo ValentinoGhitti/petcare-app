@@ -198,7 +198,7 @@ export default {
     source: String
   },
   methods: {
-    ...mapActions(['login', 'register']),
+    ...mapActions('petcare', ['login', 'register']),
     async handleLogin() {
       if (this.$refs.form.validate()) {
         try {

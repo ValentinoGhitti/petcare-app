@@ -12,16 +12,6 @@
         </v-row>
       </v-list-item-content>
     </v-list-item>
-    <v-list dense nav class="px-6">
-      <v-list-item>
-        <v-row align="center" no-gutters>
-          <v-col>
-            <v-list-item-title class="ml-2">¡Bienvenido {{ userName }}!</v-list-item-title>
-          </v-col>
-        </v-row>
-      </v-list-item>
-    </v-list>
-    <v-divider class="small-divider mt-5 custom-divider"></v-divider>
 
     <v-list dense nav class="px-6">
       <v-subheader class="text-uppercase">Menu</v-subheader>
@@ -109,7 +99,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'PCSidebar',
@@ -133,12 +123,7 @@ export default {
       ],
     };
   },
-  computed: {
-    ...mapGetters(['user']),
-    userName() {
-      return this.user ? this.user.email.split('@')[0] : '';
-    }
-  },
+
   methods: {
     ...mapActions(['logout']),
     async handleLogout() {
