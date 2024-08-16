@@ -31,5 +31,8 @@ export default {
   },
   updateChart({ commit }, chart) {
     commit('setSelectedChart', chart);
+  },
+  updateChartStat({ commit }, { label, value, period }) {
+    commit('updateStatCardData', { label, value, period });
   }
 };

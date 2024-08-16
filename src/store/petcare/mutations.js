@@ -19,5 +19,11 @@ export default {
   },
   setSelectedChart(state, chart) {
     state.selectedChart = chart;
+  },
+  updateStatCardData(state, { label, value, period }) {
+    if (!state.statCardData[label]) {
+      state.statCardData[label] = {};
+    }
+    state.statCardData[label][period] = value;
   }
 };

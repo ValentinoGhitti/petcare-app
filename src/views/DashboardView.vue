@@ -4,13 +4,25 @@
       <v-col md="7">
         <v-row>
           <v-col class="px-0" md="4">
-            <PCStatCard label="ACTIVITY" :value="25" color="#E53761" :loading="loading" />
+            <PCStatCard 
+              label="ACTIVITY"
+              color="#E53761"
+              :loading="loading"
+            />
           </v-col>
           <v-col class="px-0" md="4">
-            <PCStatCard label="SLEEP" :value="79" color="#27A468" :loading="loading" />
+            <PCStatCard
+            label="SLEEP"
+            color="#27A468"
+            :loading="loading"
+          />
           </v-col>
           <v-col class="px-0" md="4">
-            <PCStatCard label="WELNES" :value="52" color="#F2A735" :loading="loading" />
+            <PCStatCard
+              label="WELNES" 
+              color="#F2A735" 
+              :loading="loading" 
+            />
           </v-col>
         </v-row>
         <PCHealthMonitoringChart :loading="loading" />

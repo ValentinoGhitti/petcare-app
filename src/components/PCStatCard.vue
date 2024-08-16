@@ -19,21 +19,32 @@
             :items="['Daily', 'Weekly', 'Monthly']"
             outlined
             class="mr-5"
+            v-model="selectedPeriod"
+            @change="updateChartStat"
           ></v-select>
         </v-col>
       </v-row>
-      <apexchart type="radialBar" height="400" :options="chartOptions" :series="[value]"></apexchart>
+      <apexchart 
+        type="radialBar" 
+        height="400" 
+        :options="chartOptions" 
+        :series="[currentValue]"
+      ></apexchart>
     </v-card>
   </v-container>
 </template>
 
 <script>
 import VueApexCharts from 'vue-apexcharts';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   props: {
     label: String,
-    value: Number,
+    value: {
+      type: Number,
+      default: 30
+    },
     color: String,
     loading: Boolean,
   },
@@ -42,6 +53,8 @@ export default {
   },
   data() {
     return {
+      selectedPeriod: 'Daily',
+      lastUpdate: null,
       chartOptions: {
         chart: {
           height: 400,
@@ -76,6 +89,28 @@ export default {
         colors: [this.color],
       },
     };
+  },
+  computed: {
+    ...mapGetters('petcare', ['currentChartDataStat']),
+    currentValue() {
+      const value = this.currentChartDataStat(this.label, this.selectedPeriod);
+      return value || this.value;
+    }
+  },
+  methods: {
+    ...mapActions('petcare', ['updateChartStat']),
+    updateChartStat() {
+      const updatePayload = {
+        label: this.label,
+        value: this.currentValue,
+        period: this.selectedPeriod
+      };
+
+      if (JSON.stringify(updatePayload) !== JSON.stringify(this.lastUpdate)) {
+        this.lastUpdate = updatePayload;
+        this.updateChartStat(updatePayload);
+      }
+    }
   },
   watch: {
     color(newColor) {
