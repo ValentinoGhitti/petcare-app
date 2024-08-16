@@ -16,5 +16,22 @@ export default () => ({
     'ACTIVITY': { Daily: 25, Weekly: 30, Monthly: 35 },
     'SLEEP': { Daily: 79, Weekly: 70, Monthly: 65 },
     'WELNES': { Daily: 52, Weekly: 55, Monthly: 60 },
-  }
+  },
+
+  selectedType: null,
+  vaccinations: [
+    { name: 'Rabies', type: 'Overdue', date: '01 Dec 2023', veterinarian: null, menu: false },
+    { name: 'Bordetella', type: 'Noncore', date: '11 Dec 2024', veterinarian: 'James Grey', menu: false },
+    { name: 'Distemper', type: 'Core', date: '27 Jun 2024', veterinarian: 'Jim Brown', menu: false },
+    { name: 'Calicivirus', type: 'Core', date: '16 Sep 2024', veterinarian: 'Helen Brooks', menu: false }
+  ],
+  veterinarians: [
+    { name: 'James Grey' },
+    { name: 'Jim Brown' },
+    { name: 'Helen Brooks' },
+    { name: 'Dr. Smith' },
+    { name: 'Dr. Taylor' },
+    { name: 'Dr. Adams' },
+  ]
+
 })

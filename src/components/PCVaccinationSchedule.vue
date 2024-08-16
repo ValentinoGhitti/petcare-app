@@ -24,6 +24,9 @@
             label="By type"
             :items="['Daily', 'Weekly', 'Monthly']"
             outlined
+            :disabled="selectedType !== 'Overdue'"
+            v-model="selectedType"
+            @change="setSelectedType"
           ></v-select>
         </v-col>
       </v-row>
@@ -46,12 +49,33 @@
               </td>
               <td>{{ item.date }}</td>
               <td>
-                <v-chip
-                  label
-                  :color="item.veterinarian === 'Find veterinarian' ? 'blue' : 'transparent'"
-                  :text-color="item.veterinarian === 'Find veterinarian' ? 'white' : 'black'"
-                  class="chip-fixed-size pl-1"
-                >{{ item.veterinarian }}</v-chip>
+                <v-menu
+                  v-model="item.menu"
+                  offset-y
+                  transition="scale-transition"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      v-bind="attrs"
+                      v-on="on"
+                      class="a"
+                      :class="{ 'btn-active': item.veterinarian }"
+                      @click="toggleMenu(item.name)"
+                    >
+                      {{ item.veterinarian || 'Select Veterinarian' }}
+                    </v-btn>
+                  </template>
+                  <v-list>
+                    <v-list-item
+                      v-for="vet in veterinarians"
+                      :key="vet.name"
+                      :disabled="isVeterinarianAssigned(vet.name)"
+                      @click="updateVaccinationVeterinarian({ vaccinationName: item.name, veterinarianName: vet.name })"
+                    >
+                      {{ vet.name }}
+                    </v-list-item>
+                  </v-list>
+                </v-menu>
               </td>
             </tr>
           </tbody>
@@ -62,6 +86,8 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapGetters } from 'vuex';
+
 export default {
   props: {
     loading: Boolean
@@ -73,16 +99,23 @@ export default {
         { text: 'Type', value: 'type' },
         { text: 'Date', value: 'date' },
         { text: 'Veterinarian', value: 'veterinarian' }
-      ],
-      vaccinations: [
-        { name: 'Rabies', type: 'Overdue', date: '01 Dec 2023', veterinarian: 'Find veterinarian' },
-        { name: 'Bordetella', type: 'Noncore', date: '11 Dec 2024', veterinarian: 'James Grey' },
-        { name: 'Distemper', type: 'Core', date: '27 Jun 2024', veterinarian: 'Jim Brown' },
-        { name: 'Calicivirus', type: 'Core', date: '16 Sep 2024', veterinarian: 'Helen Brooks' }
       ]
     };
   },
+  computed: {
+    ...mapState('petcare', ['vaccinations', 'veterinarians']),
+    ...mapGetters('petcare', ['getSelectedType', 'getAssignedVeterinarians']),
+    selectedType: {
+      get() {
+        return this.getSelectedType;
+      },
+      set(value) {
+        this.setSelectedType(value);
+      }
+    }
+  },
   methods: {
+    ...mapMutations('petcare', ['setSelectedType', 'updateVaccinationVeterinarian', 'toggleMenu']),
     getStatusClass(status) {
       switch (status) {
         case 'Overdue':
@@ -94,69 +127,45 @@ export default {
         default:
           return 'chip-default';
       }
+    },
+    isVeterinarianAssigned(veterinarianName) {
+      return this.getAssignedVeterinarians.includes(veterinarianName);
     }
   }
 };
 </script>
 
 <style>
-.v-card .v-sheet {
-  border-radius: 16px;
-  padding-bottom: 0px ;
-}
-
-td {
-  padding: 10px;
-}
-
-.custom-data-table .v-data-table-header {
-  background-color: #DAE3F8 !important;
-  border: 1px solid #DAE3F8 !important;
-}
-
-.custom-data-table .v-data-table-header th {
-  color: #333;
-  border: 1px solid #DAE3F8 !important;
-}
-
-.custom-data-table .v-data-table-header th,
-.custom-data-table .v-data-table-header td {
-  background-color: #DAE3F8 !important;
-  border: 1px solid #DAE3F8 !important;
-}
-
-.custom-data-table {
-  border: 1px solid #DAE3F8 !important;
-}
-
-.chip-fixed-size {
-  height: 24px;
-  width: 90px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  border-radius: 12px;
-}
-
-.v-text-field--outlined fieldset  {
-  border: 1px solid #DAE3F8 !important;
-  border-radius: 4px;
-}
-
 .chip-overdue {
-  background-color: #F7C1CE !important;
-  color: #D03258 !important;
+  background-color: #FFCDD2; /* Rojo claro */
+  color: #C62828; /* Rojo oscuro */
 }
 
 .chip-noncore {
-  background-color: #F7E1C1 !important;
-  color: #F2A735 !important;
+  background-color: #C5E1A5; /* Verde claro */
+  color: #2E7D32; /* Verde oscuro */
 }
 
 .chip-core {
-  background-color: #BDE8D3 !important;
-  color: #27A468 !important;
+  background-color: #BBDEFB; /* Azul claro */
+  color: #1565C0; /* Azul oscuro */
 }
 
+.chip-default {
+  background-color: #E0E0E0; /* Gris */
+  color: #757575; /* Gris oscuro */
+}
+
+.v-list-item {
+  cursor: pointer;
+}
+
+.v-list-item:hover {
+  background-color: #f0f0f0;
+}
+
+.v-list-item[disabled] {
+  color: #ccc;
+  pointer-events: none;
+}
 </style>
