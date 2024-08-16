@@ -12,7 +12,7 @@
     <v-card class="mt-11 mx-0 mb-5 test" v-else>
       <v-row>
         <v-col col="1" class="d-flex align-center">
-          <v-card-text>{{ label }}</v-card-text>
+          <v-card-text class="custom-span">{{ label }}</v-card-text>
         </v-col>
         <v-col col="5" md="5" xl="5" class="mr-5 mr-sm-1 mr-xl-5 mr-xs-1">
           <v-select
@@ -137,6 +137,10 @@ export default {
   line-height: 0.5rem;
   overflow: hidden;
   margin-top: 0.4rem;
+}
+
+.custom-span {
+  font-size: 12px;
 }
 
 .v-text-field--outlined >>> fieldset {

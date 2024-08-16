@@ -5,7 +5,7 @@
       <v-col md="7">
         <!-- Stat Cards -->
         <v-row>
-          <v-col class="px-0" md="4">
+          <v-col class="px-0 mr-0" md="4">
             <PCStatCard 
               label="ACTIVITY"
               color="#E53761"
@@ -21,7 +21,8 @@
           </v-col>
           <v-col class="px-0" md="4">
             <PCStatCard
-              label="WELNESS" 
+              label="WELNESS"
+              class="f-5"
               color="#F2A735" 
               :loading="loading" 
             />
