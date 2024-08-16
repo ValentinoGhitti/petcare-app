@@ -1,3 +1,94 @@
+<template>
+  <v-container fluid>
+    <v-row class="d-flex justify-center align-center min-height">
+      <img
+        src="../../public/img/img-passr.png"
+        height="300px"
+        alt="stock-img"
+        class="fade-in"
+      />
+      <v-col class="wave"></v-col>
+      <v-col cols="12" sm="8" md="5">
+        <v-card class="pa-4 text-center login-card fade-in">
+          <h2 class="mb-4 text-start">RESET PASSWORD</h2>
+          <v-stepper v-model="step">
+            <v-stepper-header>
+              <v-stepper-step step="1" :complete="step > 1">
+                Enter Email
+              </v-stepper-step>
+              <v-divider></v-divider>
+              <v-stepper-step step="2" :complete="step > 2">
+                New Password
+              </v-stepper-step>
+            </v-stepper-header>
+            <v-stepper-items>
+              <v-stepper-content step="1">
+                <v-form
+                  ref="formStep1"
+                  v-model="validStep1"
+                  lazy-validation
+                  @submit.prevent="validateEmail"
+                >
+                  <v-text-field
+                    v-model="email"
+                    label="Email Address"
+                    prepend-inner-icon="mdi-email"
+                    :rules="emailRules"
+                    outlined
+                    dense
+                    color="#2196F3"
+                    required
+                  ></v-text-field>
+                </v-form>
+                <v-btn color="#2196F3" @click="validateEmail">
+                  Continue
+                </v-btn>
+                <v-btn @click="cancel">Cancel</v-btn>
+              </v-stepper-content>
+
+              <v-stepper-content step="2">
+                <v-form
+                  ref="formStep2"
+                  v-model="validStep2"
+                  lazy-validation
+                  @submit.prevent="resetPassword"
+                >
+                  <v-text-field
+                    v-model="newPassword"
+                    label="New Password"
+                    prepend-inner-icon="mdi-lock"
+                    type="password"
+                    :rules="passwordRules"
+                    outlined
+                    dense
+                    color="#2196F3"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="repeatPassword"
+                    label="Repeat Password"
+                    prepend-inner-icon="mdi-lock"
+                    type="password"
+                    :rules="repeatPasswordRules"
+                    outlined
+                    dense
+                    color="#2196F3"
+                    required
+                  ></v-text-field>
+                </v-form>
+                <v-btn color="#2196F3" @click="resetPassword">
+                  Reset Password
+                </v-btn>
+                <v-btn @click="cancel">Cancel</v-btn>
+              </v-stepper-content>
+            </v-stepper-items>
+          </v-stepper>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
 <script>
 export default {
   data() {
@@ -23,7 +114,7 @@ export default {
         v => v === this.newPassword || 'Passwords must match',
       ],
       alertMessage: '',
-      alertType: ''
+      alertType: '',
     };
   },
   methods: {
@@ -83,77 +174,6 @@ export default {
   }
 };
 </script>
-
-<template>
-  <v-container fluid>
-    <v-row class="d-flex justify-center align-center min-height">
-      <img src="../../public/img/img-passr.png" height="300px" alt="stock-img" class="fade-in">
-      <v-col class="wave"></v-col>
-      <v-col cols="12" sm="8" md="5">
-        <v-card class="pa-4 text-center login-card fade-in">
-          <h2 class="mb-4 text-start">RESET PASSWORD</h2>
-          <v-stepper v-model="step">
-            <v-stepper-header>
-              <v-stepper-step step="1" :complete="step > 1">
-                Enter Email
-              </v-stepper-step>
-              <v-divider></v-divider>
-              <v-stepper-step step="2" :complete="step > 2">
-                New Password
-              </v-stepper-step>
-            </v-stepper-header>
-            <v-stepper-items>
-              <v-stepper-content step="1">
-                <v-form ref="formStep1" v-model="validStep1" lazy-validation @submit.prevent="validateEmail">
-                  <v-text-field
-                    v-model="email"
-                    label="Email Address"
-                    prepend-inner-icon="mdi-email"
-                    :rules="emailRules"
-                    outlined
-                    dense
-                    color="#2196F3"
-                    required
-                  ></v-text-field>
-                </v-form>
-                <v-btn color="#2196F3" @click="validateEmail">Continue</v-btn>
-                <v-btn @click="cancel">Cancel</v-btn>
-              </v-stepper-content>
-              <v-stepper-content step="2">
-                <v-form ref="formStep2" v-model="validStep2" lazy-validation @submit.prevent="resetPassword">
-                  <v-text-field
-                    v-model="newPassword"
-                    label="New Password"
-                    prepend-inner-icon="mdi-lock"
-                    type="password"
-                    :rules="passwordRules"
-                    outlined
-                    dense
-                    color="#2196F3"
-                    required
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="repeatPassword"
-                    label="Repeat Password"
-                    prepend-inner-icon="mdi-lock"
-                    type="password"
-                    :rules="repeatPasswordRules"
-                    outlined
-                    dense
-                    color="#2196F3"
-                    required
-                  ></v-text-field>
-                </v-form>
-                <v-btn color="#2196F3" @click="resetPassword">Reset Password</v-btn>
-                <v-btn @click="cancel">Cancel</v-btn>
-              </v-stepper-content>
-            </v-stepper-items>
-          </v-stepper>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
-</template>
 
 <style scoped>
 .min-height {

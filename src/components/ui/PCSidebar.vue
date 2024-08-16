@@ -1,5 +1,6 @@
 <template>
-  <v-navigation-drawer permanent app  class="sidebar">
+  <v-navigation-drawer permanent app class="sidebar">
+    <!-- Header Section -->
     <v-list-item class="mb-5 px-6">
       <v-list-item-content>
         <v-row align="center" no-gutters>
@@ -13,6 +14,7 @@
       </v-list-item-content>
     </v-list-item>
 
+    <!-- Menu Section -->
     <v-list dense nav class="px-6">
       <v-subheader class="text-uppercase">Menu</v-subheader>
       <v-list-item
@@ -33,6 +35,7 @@
       <v-divider class="small-divider mt-5 custom-divider"></v-divider>
     </v-list>
 
+    <!-- Analytics Section -->
     <v-list dense nav class="px-6">
       <v-subheader class="text-uppercase">Analytics</v-subheader>
       <v-list-item v-for="item in analyticsItems" :key="item.title" link>
@@ -48,6 +51,7 @@
       <v-divider class="small-divider mt-5 custom-divider"></v-divider>
     </v-list>
 
+    <!-- Schedule Section -->
     <v-list dense nav class="px-6">
       <v-subheader class="text-uppercase">Schedule</v-subheader>
       <v-list-item v-for="item in scheduleItems" :key="item.title" link>
@@ -59,16 +63,14 @@
             <v-list-item-title class="ml-2">{{ item.title }}</v-list-item-title>
           </v-col>
           <v-col v-if="item.title === 'Appointments'" cols="auto">
-            <v-chip
-              class="notification-chip ml-2"
-              label
-            >2</v-chip>
+            <v-chip class="notification-chip ml-2" label>2</v-chip>
           </v-col>
         </v-row>
       </v-list-item>
       <v-divider class="small-divider mt-5 custom-divider"></v-divider>
     </v-list>
 
+    <!-- Help Section -->
     <v-list dense nav class="px-6">
       <v-subheader class="text-uppercase">Help</v-subheader>
       <v-list-item v-for="item in helpItems" :key="item.title" link>
@@ -83,6 +85,7 @@
       </v-list-item>
     </v-list>
 
+    <!-- Logout Section -->
     <v-list dense nav class="mt-15 px-6">
       <v-list-item link @click="handleLogout">
         <v-row align="center" no-gutters>
@@ -123,7 +126,6 @@ export default {
       ],
     };
   },
-
   methods: {
     ...mapActions('petcare', ['logout']),
     async handleLogout() {
@@ -147,7 +149,7 @@ export default {
   border: 1px solid;
 }
 
-.v-list-item-title .v-subheader  {
+.v-list-item-title .v-subheader {
   color: #0B1C33;
 }
 

@@ -1,14 +1,15 @@
 <template>
   <v-container fluid fill-height class="pa-0 full-height">
-    <v-row align="center" justify="center" class="fill-height ma-0 full-height">
+    <v-row align="center" justify="center" class="fill-height ma-0">
       <v-col cols="12" class="fill-height pa-0">
         <v-card class="elevation-6 fill-height pa-0 full-height">
           <v-window v-model="step" class="fill-height">
+            <!-- Login Window Item -->
             <v-window-item :value="1">
               <v-row no-gutters class="fill-height ma-0 pa-0">
                 <v-col cols="12" md="6" class="pa-0 ma-0">
                   <v-card-text class="mt-12">
-                    <h2 class="text-center">Login in to Your Account</h2>
+                    <h2 class="text-center">Login to Your Account</h2>
                     <h4 class="text-center grey--text">
                       Log in to your account to continue managing and <br>
                       updating your pet care routines.
@@ -47,13 +48,28 @@
                               ></v-checkbox>
                             </v-col>
                             <v-col cols="12" sm="5">
-                              <a click class="caption blue--text click" @click="handleForgotPassword">Forgot password</a>
+                              <a
+                                class="caption blue--text click"
+                                @click="handleForgotPassword"
+                              >Forgot password</a>
                             </v-col>
                           </v-row>
-                          <v-alert v-if="errorMessage" type="error" class="my-0" border="left" color="red">
+                          <v-alert
+                            v-if="errorMessage"
+                            type="error"
+                            class="my-0"
+                            border="left"
+                            color="red"
+                          >
                             {{ errorMessage }}
                           </v-alert>
-                          <v-btn color="blue" dark block tile @click="handleLogin">
+                          <v-btn
+                            color="blue"
+                            dark
+                            block
+                            tile
+                            @click="handleLogin"
+                          >
                             Log in
                           </v-btn>
                         </v-form>
@@ -72,7 +88,12 @@
                       </h4>
                     </v-card-text>
                     <div class="text-center">
-                      <v-btn tile outlined dark @click="step++">
+                      <v-btn
+                        tile
+                        outlined
+                        dark
+                        @click="step++"
+                      >
                         SIGN UP
                       </v-btn>
                     </div>
@@ -80,6 +101,8 @@
                 </v-col>
               </v-row>
             </v-window-item>
+
+            <!-- Sign Up Window Item -->
             <v-window-item :value="2">
               <v-row no-gutters class="fill-height ma-0 pa-0">
                 <v-col cols="12" md="6" class="blue rounded-br-xl fill-height pa-0 ma-0">
@@ -93,7 +116,12 @@
                       </h4>
                     </v-card-text>
                     <div class="text-center">
-                      <v-btn tile outlined dark @click="step--">
+                      <v-btn
+                        tile
+                        outlined
+                        dark
+                        @click="step--"
+                      >
                         Log in
                       </v-btn>
                     </div>
@@ -158,7 +186,13 @@
                             ></v-checkbox>
                           </v-col>
                         </v-row>
-                        <v-btn color="blue" @click="handleRegister" dark block tile>
+                        <v-btn
+                          color="blue"
+                          @click="handleRegister"
+                          dark
+                          block
+                          tile
+                        >
                           Sign up
                         </v-btn>
                       </v-col>

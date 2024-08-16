@@ -1,5 +1,6 @@
 <template>
   <v-app-bar app elevation="3" class="top-bar">
+    <!-- Search Field -->
     <v-col cols="col-6">
       <v-text-field
         solo
@@ -10,6 +11,8 @@
         class="search-field"
       ></v-text-field>
     </v-col>
+
+    <!-- Desktop Actions -->
     <v-col cols="col-3" class="d-none d-lg-flex justify-end align-center">
       <v-btn icon color="primary" class="mr-4">
         <v-icon class="black-icon">mdi-information-outline</v-icon>
@@ -21,6 +24,8 @@
         Add widget
       </v-btn>
     </v-col>
+
+    <!-- Mobile Menu -->
     <v-col cols="col-3" class="d-lg-none d-flex justify-center align-center">
       <v-menu offset-y>
         <template v-slot:activator="{ attrs, on }">
@@ -61,10 +66,10 @@ export default {
   background-color: #FEFEFE !important;
   border-left: 1px solid #FEFEFE !important;
   border-right: 1px solid #FEFEFE !important;
-  border: #DAE3F8 1px solid;
+  border-bottom: 2px solid #DAE3F8 !important;
+  border-top: #DAE3F8 1px solid;
   padding-top: 10px;
   padding-bottom: 90px;
-  border-bottom: 2px solid #DAE3F8 !important;
   box-shadow: none !important;
 }
 
@@ -85,5 +90,4 @@ export default {
   color: black !important;
   opacity: 0.7;
 }
-
 </style>

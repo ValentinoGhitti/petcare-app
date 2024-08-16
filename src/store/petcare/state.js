@@ -1,8 +1,10 @@
 export default () => ({
+  // Authentication and user data
   isAuthenticated: !!localStorage.getItem('authToken'),
   user: JSON.parse(localStorage.getItem('user')) || null,
   users: JSON.parse(localStorage.getItem('users')) || [],
 
+  // Chart data
   selectedChart: 'stressLevel',
   chartData: {
     stressLevel: [1, 1.5, 2.2, 1.6, 2.8, 2.5, 2.9, 1.9, 1.9, 1.9, 2, 2.4, 3.5, 2.6, 3.9, 5, 6, 5, 4.2, 4, 3.4, 2.9, 1.8, 2, 2.4, 3.3],
@@ -11,6 +13,7 @@ export default () => ({
     caloriesBurned: [2, 2.5, 3.2, 3.6, 3.8, 3.5, 3.9, 4.9, 4.9, 5.9, 6, 6.4, 7.5, 6.6, 7.9, 8, 9, 8, 7.2, 6, 5.4, 4.9, 4.8, 5, 5.4, 6.3],
   },
 
+  // Chart statistics
   selectedChartStat: 'ACTIVITY',
   statCardData: {
     'ACTIVITY': { Daily: 25, Weekly: 30, Monthly: 35 },
@@ -18,6 +21,7 @@ export default () => ({
     'WELNESS': { Daily: 52, Weekly: 55, Monthly: 60 },
   },
 
+  // Vaccination and veterinarian data
   selectedType: 'All',
   vaccinations: [
     { name: 'Rabies', type: 'Overdue', date: '01 Dec 2023', veterinarian: null, menu: false },
@@ -33,4 +37,4 @@ export default () => ({
     { name: 'Dr. Taylor' },
     { name: 'Dr. Adams' },
   ]
-})
+});

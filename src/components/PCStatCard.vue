@@ -1,17 +1,20 @@
 <template>
   <v-container fluid>
+    <!-- Loading Skeleton Loader -->
     <v-skeleton-loader
       v-if="loading"
       :loading="loading"
       type="card"
       class="my-8"
     ></v-skeleton-loader>
+
+    <!-- Main Content -->
     <v-card class="mt-11 mx-0 mb-5 test" v-else>
       <v-row>
         <v-col col="1" class="d-flex align-center">
           <v-card-text>{{ label }}</v-card-text>
         </v-col>
-        <v-col col="5" md="5" xl="5" class="mr-5 mr-sm-1 mr-xl-5 mr-xs-1"> 
+        <v-col col="5" md="5" xl="5" class="mr-5 mr-sm-1 mr-xl-5 mr-xs-1">
           <v-select
             dense
             hide-details
@@ -23,10 +26,10 @@
           ></v-select>
         </v-col>
       </v-row>
-      <apexchart 
-        type="radialBar" 
+      <apexchart
+        type="radialBar"
         height="400"
-        :options="chartOptions" 
+        :options="chartOptions"
         :series="[currentValue]"
       ></apexchart>
     </v-card>
@@ -70,9 +73,7 @@ export default {
             },
             dataLabels: {
               show: true,
-              name: {
-                show: false,
-              },
+              name: { show: false },
               value: {
                 fontSize: '36px',
                 fontWeight: 'bold'
@@ -127,6 +128,7 @@ export default {
 .v-card {
   border-radius: 16px;
 }
+
 .custom-select {
   font-size: 0.75rem;
   font-weight: bold;
@@ -136,14 +138,17 @@ export default {
   overflow: hidden;
   margin-top: 0.4rem;
 }
+
 .v-text-field--outlined >>> fieldset {
   border: 2px solid #DAE3F8;
   border-radius: 9px !important;
 }
+
 .v-text-field--outlined >>> .v-icon {
   color: #3788E5 !important;
 }
-.theme--light.v-card{
+
+.theme--light.v-card {
   color: #0B1C33 !important;
 }
 </style>

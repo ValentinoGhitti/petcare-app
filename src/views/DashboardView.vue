@@ -1,7 +1,9 @@
 <template>
   <v-container fluid class="main-content">
     <v-row>
+      <!-- Main Content Column -->
       <v-col md="7">
+        <!-- Stat Cards -->
         <v-row>
           <v-col class="px-0" md="4">
             <PCStatCard 
@@ -12,10 +14,10 @@
           </v-col>
           <v-col class="px-0" md="4">
             <PCStatCard
-            label="SLEEP"
-            color="#27A468"
-            :loading="loading"
-          />
+              label="SLEEP"
+              color="#27A468"
+              :loading="loading"
+            />
           </v-col>
           <v-col class="px-0" md="4">
             <PCStatCard
@@ -25,8 +27,10 @@
             />
           </v-col>
         </v-row>
+        <!-- Health Monitoring Chart -->
         <PCHealthMonitoringChart :loading="loading" />
       </v-col>
+      <!-- Side Column -->
       <v-col md="5">
         <PCVaccinationSchedule :loading="loading" />
         <PCChat :loading="loading" />

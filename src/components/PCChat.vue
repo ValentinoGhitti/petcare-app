@@ -1,11 +1,14 @@
 <template>
   <v-container>
+    <!-- Loading Skeleton Loader -->
     <v-skeleton-loader
       v-if="loading"
       :loading="loading"
       type="table-heading, list-item-avatar, list-item-avatar, list-item-avatar, list-item-avatar"
       class="my-4"
     ></v-skeleton-loader>
+
+    <!-- Chat Content -->
     <v-card v-else class="pa-4 mt-0">
       <v-card-text>CHAT</v-card-text>
       <v-list>
@@ -51,15 +54,20 @@ export default {
 .v-card {
   border-radius: 16px;
 }
+
 .v-list-item-title {
   font-weight: bold;
 }
+
 .v-list-item-subtitle {
   color: grey;
 }
-.theme--light.v-card > .v-card__text, .theme--light.v-card > .v-card__subtitle {
+
+.theme--light.v-card > .v-card__text,
+.theme--light.v-card > .v-card__subtitle {
   color: #0B1C33 !important;
 }
+
 .notification-chip {
   background-color: #E53761 !important;
   color: white !important;

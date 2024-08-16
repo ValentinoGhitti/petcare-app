@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <!-- Loading Skeleton Loader -->
     <v-skeleton-loader
       v-if="loading"
       :loading="loading"
@@ -7,13 +8,17 @@
       height="450px"
       class="mt-9"
     ></v-skeleton-loader>
-    <v-card v-else height="450px" class="pa-5  mt-8">
+
+    <!-- Main Content -->
+    <v-card v-else height="450px" class="pa-5 mt-8">
       <v-row class="d-flex justify-center">
+        <!-- Title and Search Controls -->
         <v-col lg="5" class="d-flex align-center mb-6">
           <span class="my-text">VACCINATION SCHEDULE</span>
         </v-col>
         <v-col lg="7" class="d-flex align-center">
           <v-col class="custom-align-center" cols="auto">
+            <!-- Search Field -->
             <v-text-field
               v-if="searchVisible"
               v-model="searchQuery"
@@ -22,9 +27,11 @@
               hide-details
               class="mr-2 search-field"
             ></v-text-field>
-            <v-icon @click="toggleSearch" class=" theme--red mr-5 mb-5">
+            <!-- Search Icon -->
+            <v-icon @click="toggleSearch" class="theme--red mr-5 mb-5">
               mdi-magnify
             </v-icon>
+            <!-- Type Selector -->
             <v-select
               dense
               :items="['All', 'Overdue', 'Core', 'Noncore']"
@@ -35,6 +42,7 @@
           </v-col>
         </v-col>
       </v-row>
+      <!-- Data Table -->
       <v-data-table
         :headers="headers"
         :items="filteredVaccinations"
@@ -131,6 +139,7 @@ export default {
       return vaccinations;
     }
   },
+
   methods: {
     ...mapActions('petcare', ['setSelectedType']),
     
@@ -200,35 +209,6 @@ export default {
   border-radius: 8px !important;
 }
 
-.my-text {
-  color: #0B1C33 !important;
-}
-
-.custom-data-table {
-  background-color: #F2F5FA;
-  border:3px solid #DAE3F8;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: -16px;
-  color: white;
-  font-weight: bold;
-}
-
-tbody {
-  background-color: #FEFEFE;
-  color: #0B1C33;
-  font-weight: 400;
-  border: 1px solid #DAE3F8;
-  border-color: DAE3F8;
-}
-
-.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row),
-.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row) {
-  border-bottom: 2px solid #DAE3F8;
-  border-top: 2px solid #DAE3F8;
-}
-
 .theme--light .v-chip.chip-core {
   background-color: #EAF8F1;
   border: 2px solid #BDE8D3;
@@ -244,6 +224,31 @@ tbody {
 .theme--light .v-chip.chip-default {
   background-color: #E0E0E0;
   color: #757575;
+}
+
+.my-text {
+  color: #0B1C33 !important;
+}
+
+.custom-data-table {
+  background-color: #F2F5FA;
+  border: 3px solid #DAE3F8;
+  border-radius: 16px;
+  color: white;
+  font-weight: bold;
+}
+
+tbody {
+  background-color: #FEFEFE;
+  color: #0B1C33;
+  font-weight: 400;
+  border: 1px solid #DAE3F8;
+}
+
+.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row),
+.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row) {
+  border-bottom: 2px solid #DAE3F8;
+  border-top: 2px solid #DAE3F8;
 }
 
 .v-list-item {
@@ -312,15 +317,16 @@ tbody {
   border: 2px solid #DAE3F8;
   border-radius: 9px !important;
 }
+
 .v-text-field--outlined >>> .v-icon {
   color: #3788E5 !important;
 }
 
-.v-text-field >>> .v-input__slot::before  { 
+.v-text-field >>> .v-input__slot::before { 
   border: 1px solid #DAE3F8 !important;
 }
 
-.v-text-field >>> .v-input__slot::after  { 
+.v-text-field >>> .v-input__slot::after { 
   border-color: #DAE3F8 !important; 
 }
 

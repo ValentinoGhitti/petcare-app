@@ -1,11 +1,14 @@
 <template>
   <v-card>
+    <!-- Loading Skeleton Loader -->
     <v-skeleton-loader
       v-if="loading"
       :loading="loading"
       type="table-heading, list-item-two-line, image"
       height="450px"
     ></v-skeleton-loader>
+
+    <!-- Main Content -->
     <div v-else>
       <v-row class="d-flex justify-center">
         <v-col lg="8" class="d-flex align-center px-0 mb-6">
@@ -102,26 +105,14 @@ export default {
         chart: {
           type: 'area',
           height: 350,
-          zoom: {
-            enabled: false
-          },
-          toolbar: {
-            show: false
-          },
+          zoom: { enabled: false },
+          toolbar: { show: false },
           background: '#FFFFFF'
         },
-        title: {
-          text: '',
-        },
-        subtitle: {
-          text: '',
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'smooth'
-        },
+        title: { text: '' },
+        subtitle: { text: '' },
+        dataLabels: { enabled: false },
+        stroke: { curve: 'smooth' },
         fill: {
           type: 'gradient',
           gradient: {
@@ -136,10 +127,7 @@ export default {
         colors: ['#0288D1'],
         xaxis: {
           categories: this.getCategoriesForRange('Monthly'),
-          labels: {
-            rotate: -45,
-            align: 'right',
-          }
+          labels: { rotate: -45, align: 'right' }
         },
         yaxis: {
           min: 1,
@@ -151,10 +139,8 @@ export default {
             }
           }
         },
-        legend: {
-          horizontalAlign: 'left'
-        }
-      },
+        legend: { horizontalAlign: 'left' }
+      }
     };
   },
   computed: {
@@ -174,26 +160,24 @@ export default {
       const newCategories = this.getCategoriesForRange(this.selectedRange);
       this.chartOptions.xaxis.categories = newCategories;
       this.$refs.chart.updateOptions({
-        xaxis: {
-          categories: newCategories
-        }
+        xaxis: { categories: newCategories }
       });
       this.$refs.chart.updateSeries([{ name: 'Activity', data: this.series }]);
     },
     getCategoriesForRange(range) {
       switch (range) {
         case 'Daily':
-          return [
-            'Monday', '',
+        return [
+            '', 'Monday','',
             'Wednesday', '',
-            'Friday', '', '',
+            'Friday', '', 
             'Sunday', '',
           ];
         case 'Weekly':
           return [
-            'Week 1', '', '', '', 
-            'Week 2', '', '', '', '',
-            'Week 3', '', '', '', '',
+            '', 'Week 1', '', '', 
+            'Week 2', '', '', '', 
+            'Week 3', '', '', '', 
             'Week 4', '', '', '',
           ];
         case 'Monthly':
@@ -242,6 +226,7 @@ export default {
   border: 2px solid #DAE3F8;
   border-radius: 9px !important;
 }
+
 .v-text-field--outlined >>> .v-icon {
   color: #3788E5 !important;
 }
@@ -265,7 +250,7 @@ export default {
   padding-right: 1px;
 }
 
-.theme--light.v-card{
+.theme--light.v-card {
   color: #0B1C33 !important;
 }
 </style>
