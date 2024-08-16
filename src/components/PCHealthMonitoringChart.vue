@@ -18,6 +18,8 @@
             class="px-0"
             :items="['Daily', 'Weekly', 'Monthly']"
             outlined
+            v-model="selectedRange"
+            @change="updateChartRange"
           ></v-select>
         </v-col>
       </v-row>
@@ -69,7 +71,13 @@
 
       <v-row>
         <v-col lg="12" class="chart-container">
-          <apexchart type="area" height="300" :options="chartOptions" :series="[{ name: 'Activity', data: series }]"></apexchart>
+          <apexchart
+            ref="chart"
+            type="area"
+            height="300"
+            :options="chartOptions"
+            :series="[{ name: 'Activity', data: series }]">
+          </apexchart>
         </v-col>
       </v-row>
     </div>
@@ -89,7 +97,8 @@ export default {
   },
   data() {
     return {
-      activeButton: 'stressLevel', // Valor por defecto
+      activeButton: 'stressLevel',
+      selectedRange: 'Monthly',
       chartOptions: {
         chart: {
           type: 'area',
@@ -112,7 +121,7 @@ export default {
           enabled: false
         },
         stroke: {
-          curve: 'straight'
+          curve: 'smooth'
         },
         fill: {
           type: 'gradient',
@@ -127,21 +136,8 @@ export default {
         },
         colors: ['#0288D1'],
         xaxis: {
-          categories: [
-            '', 'September', '', '', '', '', '', '',
-            'November', '', '', '', '', '', '', '',
-            'December',
-            'January'
-          ],
+          categories: this.getCategoriesForRange('Monthly'),
           labels: {
-            formatter: function(value) {
-              const monthsToShow = ['September', 'November', 'December', 'January'];
-              if (monthsToShow.includes(value)) {
-                return value;
-              } else {
-                return '';
-              }
-            },
             rotate: -45,
             align: 'right',
           }
@@ -173,6 +169,39 @@ export default {
     setActiveButton(button) {
       this.activeButton = button;
       this.updateChart(button);
+    },
+    updateChartRange() {
+      const newCategories = this.getCategoriesForRange(this.selectedRange);
+      this.chartOptions.xaxis.categories = newCategories;
+      this.$refs.chart.updateOptions({
+        xaxis: {
+          categories: newCategories
+        }
+      });
+    },
+    getCategoriesForRange(range) {
+      switch (range) {
+        case 'Daily':
+          return [
+            '', 'Monday', '', '', '', '', '', '',
+            'Wednesday', '', '', '', '', '', '', '','Friday',
+            '','','','','','','','Sunday'
+          ];
+        case 'Weekly':
+          return [
+            '', 'Week 1', '', '', '', '', '', '',
+            'Week 2', '', '', '', '', '', '', '','Week 3',
+            '','','','','','','','Week 4'
+          ];
+        case 'Monthly':
+          return [
+            '', 'September', '', '', '', '', '', '',
+            'November', '', '', '', '', '', '', '','December',
+            '','','','','','','','January'
+          ];
+        default:
+          return [];
+      }
     }
   },
   mounted() {
