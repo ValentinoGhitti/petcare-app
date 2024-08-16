@@ -7,7 +7,6 @@ export default {
     if (user) {
       const token = 'someRandomToken';
       localStorage.setItem('authToken', token);
-      localStorage.setItem('user', JSON.stringify(user));
       commit('setAuth', true);
       commit('setUser', user);
     } else {
@@ -21,13 +20,12 @@ export default {
     commit('setUser', null);
   },
   resetPasswordAction({ commit, state }, { email, newPassword }) {
-    const userExists = state.users.some(user => user.email === email);
-    if (userExists) {
+    const user = state.users.find(user => user.email === email);
+    if (user) {
       commit('updateUserPassword', { email, newPassword });
       return true;
-    } else {
-      return false;
     }
+    return false;
   },
   updateChart({ commit }, chart) {
     commit('setSelectedChart', chart);

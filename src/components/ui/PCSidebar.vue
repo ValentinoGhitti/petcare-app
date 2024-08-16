@@ -125,7 +125,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions('petcare', ['logout']),
     async handleLogout() {
       await this.logout();
       localStorage.removeItem('authToken');

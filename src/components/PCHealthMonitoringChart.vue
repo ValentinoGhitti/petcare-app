@@ -154,13 +154,13 @@ export default {
         legend: {
           horizontalAlign: 'left'
         }
-      }
+      },
     };
   },
   computed: {
-    ...mapGetters('petcare', ['currentChartData']),
+    ...mapGetters('petcare', ['chartDataForRange']),
     series() {
-      return this.currentChartData;
+      return this.chartDataForRange(this.activeButton, this.selectedRange);
     }
   },
   methods: {
@@ -168,6 +168,7 @@ export default {
     setActiveButton(button) {
       this.activeButton = button;
       this.updateChart(button);
+      this.updateChartRange();
     },
     updateChartRange() {
       const newCategories = this.getCategoriesForRange(this.selectedRange);
@@ -177,20 +178,23 @@ export default {
           categories: newCategories
         }
       });
+      this.$refs.chart.updateSeries([{ name: 'Activity', data: this.series }]);
     },
     getCategoriesForRange(range) {
       switch (range) {
         case 'Daily':
           return [
-            '', 'Monday', '', '', '', '', '', '',
-            'Wednesday', '', '', '', '', '', '', '','Friday',
-            '','','','','','','','Sunday'
+            'Monday', '',
+            'Wednesday', '',
+            'Friday', '', '',
+            'Sunday', '',
           ];
         case 'Weekly':
           return [
-            '', 'Week 1', '', '', '', '', '', '',
-            'Week 2', '', '', '', '', '', '', '','Week 3',
-            '','','','','','','','Week 4'
+            'Week 1', '', '', '', 
+            'Week 2', '', '', '', '',
+            'Week 3', '', '', '', '',
+            'Week 4', '', '', '',
           ];
         case 'Monthly':
           return [

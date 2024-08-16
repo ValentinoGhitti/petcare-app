@@ -20,5 +20,18 @@ export default {
       .filter(v => v.type === state.selectedType)
       .sort((a, b) => priority.indexOf(a.type) - priority.indexOf(b.type));
   },
-  veterinarians: (state) => state.veterinarians
+  veterinarians: (state) => state.veterinarians,
+  chartDataForRange: (state) => (activeButton, range) => {
+    const data = state.chartData[activeButton] || [];
+    switch (range) {
+      case 'Daily':
+        return data.slice(0, 8);
+      case 'Weekly':
+        return data.slice(0, 15);
+      case 'Monthly':
+        return data;
+      default:
+        return [];
+    }
+  }
 };

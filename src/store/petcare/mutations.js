@@ -3,8 +3,8 @@ export default {
     state.isAuthenticated = isAuthenticated;
   },
   setUser(state, user) {
-    state.users.push(user);
-    localStorage.setItem('users', JSON.stringify(state.users));
+    state.user = user;
+    localStorage.setItem('user', JSON.stringify(user));
   },
   addUser(state, user) {
     state.users.push(user);
@@ -18,8 +18,8 @@ export default {
     }
   },
   // ChartStat
-  setSelectedChart(state, chart) {
-    state.selectedChart = chart;
+  setSelectedChart(state, chartType) {
+    state.selectedChart = chartType;
   },
   updateStatCardData(state, { label, value, period }) {
     if (!state.statCardData[label]) {
