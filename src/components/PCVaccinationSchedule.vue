@@ -10,26 +10,24 @@
     <v-card v-else height="420px" class="pa-4 mt-8">
       <v-row class="d-flex justify-center">
         <v-col lg="5" class="d-flex align-center mb-6">
-          <span class="text-gray">VACCINATION SCHEDULE</span>
+          <span class="my-text">VACCINATION SCHEDULE</span>
         </v-col>
-        <v-col lg="7" class="d-flex align-center">
-          <v-col class="d-flex align-center">
+        <v-col lg="6" class="d-flex align-center">
+          <v-col class="custom-align-center" cols="auto">
             <v-text-field
               v-if="searchVisible"
               v-model="searchQuery"
               label="Search"
               dense
               hide-details
-              class="custom-align-center test "
+              class="mr-2 search-field border-blue "
             ></v-text-field>
-          </v-col>
-          <v-icon class="custom-align-center" left @click="toggleSearch">
-            mdi-magnify
-          </v-icon>
-          <v-col>
+            <v-icon @click="toggleSearch" class=" theme--red mr-5 mb-5">
+              mdi-magnify
+            </v-icon>
             <v-select
+              width="50%"
               dense
-              label="By type"
               :items="['All', 'Overdue', 'Core', 'Noncore']"
               outlined
               v-model="selectedType"
@@ -66,11 +64,11 @@
                     <v-btn
                       v-bind="attrs"
                       v-on="on"
-                      class="a"
+                      class="my-custom-btn"
                       :class="{ 'btn-active': item.veterinarian }"
                       @click="toggleMenu(item.name)"
                     >
-                      {{ item.veterinarian || 'Select Veterinarian' }}
+                      {{ item.veterinarian || 'Select Vet' }}
                     </v-btn>
                   </template>
                   <v-list>
@@ -134,12 +132,13 @@ export default {
       return vaccinations;
     }
   },
-
   methods: {
     ...mapActions('petcare', ['setSelectedType']),
+    
     updateSelectedType(type) {
       this.setSelectedType(type);
     },
+
     getStatusClass(status) {
       switch (status) {
         case 'Overdue':
@@ -152,36 +151,90 @@ export default {
           return 'chip-default';
       }
     },
+
     isVeterinarianAssigned(veterinarianName) {
       return this.getAssignedVeterinarians.includes(veterinarianName);
     },
+
     toggleSearch() {
       this.searchVisible = !this.searchVisible;
       if (!this.searchVisible) {
         this.searchQuery = '';
+      }
+    },
+
+    toggleMenu(itemName) {
+      const item = this.filteredVaccinations.find(v => v.name === itemName);
+      if (item) {
+        item.menu = !item.menu;
+      }
+    },
+
+    updateVaccinationVeterinarian({ vaccinationName, veterinarianName }) {
+      const vaccination = this.filteredVaccinations.find(v => v.name === vaccinationName);
+      if (vaccination) {
+        vaccination.veterinarian = veterinarianName;
+        vaccination.menu = false;
       }
     }
   }
 };
 </script>
 
-<style>
-.chip-overdue {
-  background-color: #FFCDD2;
-  color: #C62828;
+<style scoped>
+/* Estilos para Chips */
+.theme--light .v-chip.chip-overdue {
+  background-color: #FCEBEF;
+  color: #D03258;
+  border: 2px solid #F7C1CE;
+  border-radius: 8px !important;
 }
 
-.chip-noncore {
-  background-color: #C5E1A5;
-  color: #2E7D32;
+.theme--light .v-chip.chip-noncore {
+  background-color: #FCF5EB;
+  color: #F2A735;
+  border: 2px solid #F7E1C1;
+  border-radius: 8px !important;
 }
 
-.chip-core {
-  background-color: #BBDEFB;
-  color: #1565C0;
+.my-text {
+  color: #0B1C33 !important;
 }
 
-.chip-default {
+.custom-data-table {
+  background-color: #F2F5FA;
+  border: 2px solid #DAE3F8;
+  color: white;
+  font-weight: bold;
+}
+
+tbody {
+  background-color: #FEFEFE;
+  color: #0B1C33;
+  font-weight: 400;
+  border: 1px solid #DAE3F8;
+  border-color: DAE3F8;
+}
+
+.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row),
+.theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row) {
+  border-bottom: 2px solid #DAE3F8;
+  border-top: 2px solid #DAE3F8;
+}
+
+.theme--light .v-chip.chip-core {
+  background-color: #EAF8F1;
+  border: 2px solid #BDE8D3;
+  color: #27A468;
+  width: 75px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px !important;
+}
+
+.theme--light .v-chip.chip-default {
   background-color: #E0E0E0;
   color: #757575;
 }
@@ -197,6 +250,70 @@ export default {
 .v-list-item[disabled] {
   color: #ccc;
   pointer-events: none;
+}
+
+.search-field {
+  margin-right: 10px;
+}
+
+.custom-align-center {
+  display: flex;
+}
+
+.v-icon {
+  color: #000;
+}
+
+.v-icon:hover {
+  background: none;
+  color: #3788E5;
+}
+
+.v-icon::after {
+  background-color: transparent;
+  opacity: 0;
+}
+
+.theme--light .my-custom-btn.v-btn.v-btn--has-bg {
+  background-color: #3788E5;
+}
+
+.my-custom-btn {
+  text-transform: none;
+  background-color: #3788E5; 
+  color: #FEFEFE;
+  width: 100px;
+  border-radius: 8px;
+  font-weight: normal;
+  font-size: 0.9rem;
+  line-height: 22.4px;
+}
+
+.my-custom-btn.btn-active {
+  background-color: #FEFEFE !important;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  line-height: 22.4px;
+  font-weight: normal;
+  color: #0B1C33;
+  box-shadow: none;
+  border: 2px solid #DAE3F8;
+}
+
+/* Select */
+.v-text-field--outlined >>> fieldset {
+  border: 2px solid #DAE3F8;
+}
+.v-text-field--outlined >>> .v-icon {
+  color: #3788E5 !important;
+}
+
+.v-text-field >>> .v-input__slot::before  { 
+  border: 1px solid #DAE3F8 !important;
+}
+
+.v-text-field >>> .v-input__slot::after  { 
+  border-color: #DAE3F8 !important; 
 }
 
 </style>

@@ -12,7 +12,7 @@
         <v-list-item v-for="chat in chats" :key="chat.name">
           <v-badge :color="chat.color" class="mx-5 py-3" left dot></v-badge>
           <v-list-item-content>
-            <v-list-item-title>{{ chat.name }}</v-list-item-title>
+            <v-list-item-title class="font-weight-bold">{{ chat.name }}</v-list-item-title>
             <v-list-item-subtitle>{{ chat.message }}</v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action>
