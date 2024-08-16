@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer permanent app height="100vh" class="sidebar">
+  <v-navigation-drawer permanent app  class="sidebar">
     <v-list-item class="mb-5 px-6">
       <v-list-item-content>
         <v-row align="center" no-gutters>
@@ -138,6 +138,8 @@ export default {
 <style scoped>
 .sidebar {
   height: 100vh;
+  border-right: 1px solid #DAE3F8;
+  background-color: #FEFEFE;
 }
 
 .custom-divider {
@@ -145,9 +147,13 @@ export default {
   border: 1px solid;
 }
 
+.v-list-item-title .v-subheader  {
+  color: #0B1C33;
+}
+
 .notification-chip {
   background-color: #E53761 !important;
-  color: white !important;
+  color: #FEFEFE !important;
   border-radius: 16px;
   font-size: 12px;
   height: 20px;
@@ -159,11 +165,12 @@ export default {
 }
 
 .primary-bg {
-  background-color: #2196F3 !important;
-  color: white !important;
+  background-color: #3788E5 !important;
+  color: #FEFEFE !important;
+  border-radius: 11px;
 }
 
 .primary-bg .primary-icon {
-  color: white !important;
+  color: #FEFEFE !important;
 }
 </style>

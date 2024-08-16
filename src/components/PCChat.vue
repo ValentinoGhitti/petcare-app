@@ -57,6 +57,9 @@ export default {
 .v-list-item-subtitle {
   color: grey;
 }
+.theme--light.v-card > .v-card__text, .theme--light.v-card > .v-card__subtitle {
+  color: #0B1C33 !important;
+}
 .notification-chip {
   background-color: #E53761 !important;
   color: white !important;

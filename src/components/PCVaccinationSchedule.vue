@@ -7,12 +7,12 @@
       height="450px"
       class="mt-9"
     ></v-skeleton-loader>
-    <v-card v-else height="420px" class="pa-4 mt-8">
+    <v-card v-else height="450px" class="pa-5  mt-8">
       <v-row class="d-flex justify-center">
         <v-col lg="5" class="d-flex align-center mb-6">
           <span class="my-text">VACCINATION SCHEDULE</span>
         </v-col>
-        <v-col lg="6" class="d-flex align-center">
+        <v-col lg="7" class="d-flex align-center">
           <v-col class="custom-align-center" cols="auto">
             <v-text-field
               v-if="searchVisible"
@@ -20,13 +20,12 @@
               label="Search"
               dense
               hide-details
-              class="mr-2 search-field border-blue "
+              class="mr-2 search-field"
             ></v-text-field>
             <v-icon @click="toggleSearch" class=" theme--red mr-5 mb-5">
               mdi-magnify
             </v-icon>
             <v-select
-              width="50%"
               dense
               :items="['All', 'Overdue', 'Core', 'Noncore']"
               outlined
@@ -182,6 +181,10 @@ export default {
 </script>
 
 <style scoped>
+.v-card {
+  border-radius: 16px;
+}
+
 /* Estilos para Chips */
 .theme--light .v-chip.chip-overdue {
   background-color: #FCEBEF;
@@ -203,7 +206,11 @@ export default {
 
 .custom-data-table {
   background-color: #F2F5FA;
-  border: 2px solid #DAE3F8;
+  border:3px solid #DAE3F8;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: -16px;
   color: white;
   font-weight: bold;
 }
@@ -303,6 +310,7 @@ tbody {
 /* Select */
 .v-text-field--outlined >>> fieldset {
   border: 2px solid #DAE3F8;
+  border-radius: 9px !important;
 }
 .v-text-field--outlined >>> .v-icon {
   color: #3788E5 !important;

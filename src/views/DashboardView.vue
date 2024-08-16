@@ -19,7 +19,7 @@
           </v-col>
           <v-col class="px-0" md="4">
             <PCStatCard
-              label="WELNES" 
+              label="WELNESS" 
               color="#F2A735" 
               :loading="loading" 
             />
@@ -69,7 +69,7 @@ export default {
 .main-content {
   padding: 16px;
   flex-grow: 1;
-  background: #f9f9f9;
+  background: #F2F5FA;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

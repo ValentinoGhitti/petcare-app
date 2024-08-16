@@ -1,5 +1,5 @@
 <template>
-  <v-app class="d-flex flex-row">
+  <v-app class=" d-flex flex-row">
     <PCSidebar v-if="!shouldHideSidebarAndTopbar"></PCSidebar>
     <div class="flex-grow-1 d-flex flex-column">
       <PCTopbar v-if="!shouldHideSidebarAndTopbar"></PCTopbar>
@@ -28,16 +28,24 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .v-app {
   display: flex;
   flex-direction: row;
   height: 100vh;
+  overflow: hidden;
 }
 
 .v-main {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.v-main::-webkit-scrollbar {
+  display: none;
 }
 </style>

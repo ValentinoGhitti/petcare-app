@@ -14,8 +14,7 @@
         <v-col lg="3">
           <v-select
             dense
-            label="Select"
-            class="px-0"
+            class="px-0 mr-5 mr-sm-5 mr-lg-5 mr-xl-5 mr-xs-5"
             :items="['Daily', 'Weekly', 'Monthly']"
             outlined
             v-model="selectedRange"
@@ -25,11 +24,11 @@
       </v-row>
 
       <v-row class="d-flex justify-center mb-1">
-        <v-col lg="11" class="d-flex justify-center justify-space-between text-center buttons-border">
+        <v-col lg="11" class="box-toggle d-flex justify-center justify-space-between text-center">
           <v-chip
-            class="ma-2"
-            :color="activeButton === 'stressLevel' ? 'blue' : 'transparent'"
-            :text-color="activeButton === 'stressLevel' ? 'white' : 'grey-lighten-5'"
+            class="ma-2 toggle-active"
+            :color="activeButton === 'stressLevel' ? '#3788E5' : 'transparent'"
+            :text-color="activeButton === 'stressLevel' ? 'white' : '#0B1C33'"
             label
             @click="setActiveButton('stressLevel')"
           >
@@ -37,9 +36,9 @@
             Stress level
           </v-chip>
           <v-chip
-            class="ma-2"
-            :color="activeButton === 'pulse' ? 'blue' : 'transparent'"
-            :text-color="activeButton === 'pulse' ? 'white' : 'grey-lighten-5'"
+            class="ma-2 toggle-active"
+            :color="activeButton === 'pulse' ? '#3788E5' : 'transparent'"
+            :text-color="activeButton === 'pulse' ? 'white' : '#0B1C33'"
             label
             @click="setActiveButton('pulse')"
           >
@@ -47,9 +46,9 @@
             Pulse
           </v-chip>
           <v-chip
-            class="ma-2"
-            :color="activeButton === 'temperature' ? 'blue' : 'transparent'"
-            :text-color="activeButton === 'temperature' ? 'white' : 'grey-lighten-5'"
+            class="ma-2 toggle-active"
+            :color="activeButton === 'temperature' ? '#3788E5' : 'transparent'"
+            :text-color="activeButton === 'temperature' ? 'white' : '#0B1C33'"
             label
             @click="setActiveButton('temperature')"
           >
@@ -57,9 +56,9 @@
             Temperature
           </v-chip>
           <v-chip
-            class="ma-2"
-            :color="activeButton === 'caloriesBurned' ? 'blue' : 'transparent'"
-            :text-color="activeButton === 'caloriesBurned' ? 'white' : 'grey-lighten-5'"
+            class="ma-2 toggle-active"
+            :color="activeButton === 'caloriesBurned' ? '#3788E5' : 'transparent'"
+            :text-color="activeButton === 'caloriesBurned' ? 'white' : '#0B1C33'"
             label
             @click="setActiveButton('caloriesBurned')"
           >
@@ -213,10 +212,45 @@ export default {
 </script>
 
 <style scoped>
+.v-card {
+  border-radius: 16px;
+}
+
+.custom-select {
+  font-size: 0.75rem;
+  font-weight: bold;
+  height: 40px;
+  width: 100%;
+  line-height: 0.5rem;
+  overflow: hidden;
+  margin-top: 0.4rem;
+}
+
+.toggle-active {
+  padding: 20px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  border-radius: 0.7rem !important;
+}
+
+.v-text-field--outlined >>> fieldset {
+  border: 2px solid #DAE3F8;
+  border-radius: 9px !important;
+}
+.v-text-field--outlined >>> .v-icon {
+  color: #3788E5 !important;
+}
+
 .chart-container {
   width: 100%;
   height: 100%;
   min-height: 350px;
+}
+
+.box-toggle {
+  border: 2px solid #DAE3F8;
+  border-radius: 20px !important;
 }
 
 .buttons-border {
@@ -225,5 +259,9 @@ export default {
   padding: 2px;
   padding-left: 1px;
   padding-right: 1px;
+}
+
+.theme--light.v-card{
+  color: #0B1C33 !important;
 }
 </style>

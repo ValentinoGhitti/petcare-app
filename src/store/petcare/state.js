@@ -15,7 +15,7 @@ export default () => ({
   statCardData: {
     'ACTIVITY': { Daily: 25, Weekly: 30, Monthly: 35 },
     'SLEEP': { Daily: 79, Weekly: 70, Monthly: 65 },
-    'WELNES': { Daily: 52, Weekly: 55, Monthly: 60 },
+    'WELNESS': { Daily: 52, Weekly: 55, Monthly: 60 },
   },
 
   selectedType: 'All',
