@@ -9,23 +9,33 @@
     ></v-skeleton-loader>
     <v-card v-else height="420px" class="pa-4 mt-8">
       <v-row class="d-flex justify-center">
-        <v-col lg="7" class="d-flex align-center mb-6">
+        <v-col lg="5" class="d-flex align-center mb-6">
           <span class="text-gray">VACCINATION SCHEDULE</span>
         </v-col>
-        <v-col lg="5" class="d-flex">
-          <v-col>
-            <v-icon left>
-              mdi-magnify
-            </v-icon>
+        <v-col lg="7" class="d-flex align-center">
+          <v-col class="d-flex align-center">
+            <v-text-field
+              v-if="searchVisible"
+              v-model="searchQuery"
+              label="Search"
+              dense
+              hide-details
+              class="custom-align-center test "
+            ></v-text-field>
           </v-col>
-          <v-select
-            dense
-            label="By type"
-            :items="['All', 'Overdue', 'Core', 'Noncore']"
-            outlined
-            v-model="selectedType"
-            @change="updateSelectedType"
-          ></v-select>
+          <v-icon class="custom-align-center" left @click="toggleSearch">
+            mdi-magnify
+          </v-icon>
+          <v-col>
+            <v-select
+              dense
+              label="By type"
+              :items="['All', 'Overdue', 'Core', 'Noncore']"
+              outlined
+              v-model="selectedType"
+              @change="updateSelectedType"
+            ></v-select>
+          </v-col>
         </v-col>
       </v-row>
       <v-data-table
@@ -91,7 +101,6 @@ export default {
     loading: Boolean
   },
 
-
   data() {
     return {
       headers: [
@@ -99,7 +108,9 @@ export default {
         { text: 'Type', value: 'type' },
         { text: 'Date', value: 'date' },
         { text: 'Veterinarian', value: 'veterinarian' }
-      ]
+      ],
+      searchVisible: false,
+      searchQuery: ''
     };
   },
 
@@ -112,8 +123,18 @@ export default {
       set(value) {
         this.updateSelectedType(value);
       }
+    },
+    filteredVaccinations() {
+      let vaccinations = this.$store.getters['petcare/filteredVaccinations'];
+      if (this.searchQuery) {
+        vaccinations = vaccinations.filter(vaccination =>
+          vaccination.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      }
+      return vaccinations;
     }
   },
+
   methods: {
     ...mapActions('petcare', ['setSelectedType']),
     updateSelectedType(type) {
@@ -131,9 +152,14 @@ export default {
           return 'chip-default';
       }
     },
-    
     isVeterinarianAssigned(veterinarianName) {
       return this.getAssignedVeterinarians.includes(veterinarianName);
+    },
+    toggleSearch() {
+      this.searchVisible = !this.searchVisible;
+      if (!this.searchVisible) {
+        this.searchQuery = '';
+      }
     }
   }
 };
@@ -172,4 +198,5 @@ export default {
   color: #ccc;
   pointer-events: none;
 }
+
 </style>
