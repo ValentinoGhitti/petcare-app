@@ -42,5 +42,5 @@ export default {
     if (vaccination) {
       vaccination.menu = !vaccination.menu;
     }
-  }
+  }  
 };

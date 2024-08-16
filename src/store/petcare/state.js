@@ -18,7 +18,7 @@ export default () => ({
     'WELNES': { Daily: 52, Weekly: 55, Monthly: 60 },
   },
 
-  selectedType: null,
+  selectedType: 'All',
   vaccinations: [
     { name: 'Rabies', type: 'Overdue', date: '01 Dec 2023', veterinarian: null, menu: false },
     { name: 'Bordetella', type: 'Noncore', date: '11 Dec 2024', veterinarian: 'James Grey', menu: false },
@@ -33,5 +33,4 @@ export default () => ({
     { name: 'Dr. Taylor' },
     { name: 'Dr. Adams' },
   ]
-
 })

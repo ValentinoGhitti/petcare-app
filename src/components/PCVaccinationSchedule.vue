@@ -18,21 +18,19 @@
               mdi-magnify
             </v-icon>
           </v-col>
-
           <v-select
             dense
             label="By type"
-            :items="['Daily', 'Weekly', 'Monthly']"
+            :items="['All', 'Overdue', 'Core', 'Noncore']"
             outlined
-            :disabled="selectedType !== 'Overdue'"
             v-model="selectedType"
-            @change="setSelectedType"
+            @change="updateSelectedType"
           ></v-select>
         </v-col>
       </v-row>
       <v-data-table
         :headers="headers"
-        :items="vaccinations"
+        :items="filteredVaccinations"
         hide-default-footer
         class="custom-data-table"
       >
@@ -86,12 +84,14 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   props: {
     loading: Boolean
   },
+
+
   data() {
     return {
       headers: [
@@ -102,20 +102,23 @@ export default {
       ]
     };
   },
+
   computed: {
-    ...mapState('petcare', ['vaccinations', 'veterinarians']),
-    ...mapGetters('petcare', ['getSelectedType', 'getAssignedVeterinarians']),
+    ...mapGetters('petcare', ['filteredVaccinations', 'veterinarians', 'getAssignedVeterinarians']),
     selectedType: {
       get() {
-        return this.getSelectedType;
+        return this.$store.state.petcare.selectedType;
       },
       set(value) {
-        this.setSelectedType(value);
+        this.updateSelectedType(value);
       }
     }
   },
   methods: {
-    ...mapMutations('petcare', ['setSelectedType', 'updateVaccinationVeterinarian', 'toggleMenu']),
+    ...mapActions('petcare', ['setSelectedType']),
+    updateSelectedType(type) {
+      this.setSelectedType(type);
+    },
     getStatusClass(status) {
       switch (status) {
         case 'Overdue':
@@ -128,6 +131,7 @@ export default {
           return 'chip-default';
       }
     },
+    
     isVeterinarianAssigned(veterinarianName) {
       return this.getAssignedVeterinarians.includes(veterinarianName);
     }
@@ -137,23 +141,23 @@ export default {
 
 <style>
 .chip-overdue {
-  background-color: #FFCDD2; /* Rojo claro */
-  color: #C62828; /* Rojo oscuro */
+  background-color: #FFCDD2;
+  color: #C62828;
 }
 
 .chip-noncore {
-  background-color: #C5E1A5; /* Verde claro */
-  color: #2E7D32; /* Verde oscuro */
+  background-color: #C5E1A5;
+  color: #2E7D32;
 }
 
 .chip-core {
-  background-color: #BBDEFB; /* Azul claro */
-  color: #1565C0; /* Azul oscuro */
+  background-color: #BBDEFB;
+  color: #1565C0;
 }
 
 .chip-default {
-  background-color: #E0E0E0; /* Gris */
-  color: #757575; /* Gris oscuro */
+  background-color: #E0E0E0;
+  color: #757575;
 }
 
 .v-list-item {

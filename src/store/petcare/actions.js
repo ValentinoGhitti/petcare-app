@@ -34,5 +34,8 @@ export default {
   },
   updateChartStat({ commit }, { label, value, period }) {
     commit('updateStatCardData', { label, value, period });
+  },
+  setSelectedType({ commit}, type) {
+    commit('setSelectedType', type)
   }
 };
