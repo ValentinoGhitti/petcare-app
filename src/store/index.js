@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import petcare from '../store/petcare';
+import auth from './modules/auth';
+import dashboard from './modules/dashboard';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules: {
-    petcare
+    auth,
+    dashboard
   }
 });
 
