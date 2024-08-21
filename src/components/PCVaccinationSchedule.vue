@@ -120,17 +120,17 @@ export default {
   },
 
   computed: {
-    ...mapGetters('petcare', ['filteredVaccinations', 'veterinarians', 'getAssignedVeterinarians']),
+    ...mapGetters('dashboard', ['filteredVaccinations', 'veterinarians', 'getAssignedVeterinarians']),
     selectedType: {
       get() {
-        return this.$store.state.petcare.selectedType;
+        return this.$store.state.dashboard.selectedType;
       },
       set(value) {
         this.updateSelectedType(value);
       }
     },
     filteredVaccinations() {
-      let vaccinations = this.$store.getters['petcare/filteredVaccinations'];
+      let vaccinations = this.$store.getters['dashboard/filteredVaccinations'];
       if (this.searchQuery) {
         vaccinations = vaccinations.filter(vaccination =>
           vaccination.name.toLowerCase().includes(this.searchQuery.toLowerCase())
@@ -141,7 +141,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('petcare', ['setSelectedType']),
+    ...mapActions('dashboard', ['setSelectedType']),
     
     updateSelectedType(type) {
       this.setSelectedType(type);

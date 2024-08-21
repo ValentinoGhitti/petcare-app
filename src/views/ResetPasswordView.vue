@@ -124,7 +124,7 @@ export default {
 
       if (isValidStep1) {
         try {
-          const userExists = await this.$store.dispatch('petcare/resetPasswordAction', { email: this.email });
+          const userExists = await this.$store.dispatch('auth/resetPasswordAction', { email: this.email });
           if (userExists) {
             this.isEmailValid = true;
             this.step = 2;
@@ -149,7 +149,7 @@ export default {
           this.alertType = 'error';
         } else {
           try {
-            await this.$store.dispatch('petcare/resetPasswordAction', { email: this.email, newPassword: this.newPassword });
+            await this.$store.dispatch('auth/resetPasswordAction', { email: this.email, newPassword: this.newPassword });
             this.alertMessage = 'Password updated successfully';
             this.alertType = 'success';
             this.$router.push('/login');

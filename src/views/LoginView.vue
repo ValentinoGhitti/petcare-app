@@ -232,7 +232,7 @@ export default {
     source: String
   },
   methods: {
-    ...mapActions('petcare', ['login', 'register']),
+    ...mapActions('auth', ['login', 'register']),
     async handleLogin() {
       if (this.$refs.form.validate()) {
         try {

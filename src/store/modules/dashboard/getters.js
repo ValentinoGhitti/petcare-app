@@ -5,7 +5,6 @@ export default {
   },
 
   /* Table getters */
-
   getVaccinations: state => state.vaccinations,
   getSelectedType: state => state.selectedType,
   getVeterinarians: state => state.veterinarians,

@@ -95,14 +95,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('petcare', ['currentChartDataStat']),
+    ...mapGetters('dashboard', ['currentChartDataStat']),
     currentValue() {
       const value = this.currentChartDataStat(this.label, this.selectedPeriod);
       return value || this.value;
     }
   },
   methods: {
-    ...mapActions('petcare', ['updateChartStat']),
+    ...mapActions('dashboard', ['updateChartStat']),
     updateChartStat() {
       const updatePayload = {
         label: this.label,

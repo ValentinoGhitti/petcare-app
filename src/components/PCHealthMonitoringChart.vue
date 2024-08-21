@@ -144,13 +144,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('petcare', ['chartDataForRange']),
+    ...mapGetters('dashboard', ['chartDataForRange']),
     series() {
       return this.chartDataForRange(this.activeButton, this.selectedRange);
     }
   },
   methods: {
-    ...mapActions('petcare', ['updateChart']),
+    ...mapActions('dashboard', ['updateChart']),
     setActiveButton(button) {
       this.activeButton = button;
       this.updateChart(button);
