@@ -5,10 +5,10 @@
       <v-list-item-content>
         <v-row align="center" no-gutters>
           <v-col cols="auto">
-            <v-icon class="text-h4 primary--text">mdi-cat</v-icon>
+            <IconCat />
           </v-col>
           <v-col>
-            <v-list-item-title class="text-h6 ml-2">Petcare.</v-list-item-title>
+            <v-list-item-title class=" ml-2">PetCare.</v-list-item-title>
           </v-col>
         </v-row>
       </v-list-item-content>
@@ -25,7 +25,7 @@
       >
         <v-row align="center" no-gutters>
           <v-col cols="auto">
-            <v-icon class="primary-icon">{{ item.icon }}</v-icon>
+            <component :is="item.icon"></component>
           </v-col>
           <v-col>
             <v-list-item-title class="ml-2">{{ item.title }}</v-list-item-title>
@@ -41,7 +41,7 @@
       <v-list-item v-for="item in analyticsItems" :key="item.title" link>
         <v-row align="center" no-gutters>
           <v-col cols="auto">
-            <v-icon>{{ item.icon }}</v-icon>
+            <component :is="item.icon"></component>
           </v-col>
           <v-col>
             <v-list-item-title class="ml-2">{{ item.title }}</v-list-item-title>
@@ -57,7 +57,7 @@
       <v-list-item v-for="item in scheduleItems" :key="item.title" link>
         <v-row align="center" no-gutters>
           <v-col cols="auto">
-            <v-icon>{{ item.icon }}</v-icon>
+            <component :is="item.icon"></component>
           </v-col>
           <v-col>
             <v-list-item-title class="ml-2">{{ item.title }}</v-list-item-title>
@@ -76,7 +76,7 @@
       <v-list-item v-for="item in helpItems" :key="item.title" link>
         <v-row align="center" no-gutters>
           <v-col cols="auto">
-            <v-icon>{{ item.icon }}</v-icon>
+            <component :is="item.icon"></component>
           </v-col>
           <v-col>
             <v-list-item-title class="ml-2">{{ item.title }}</v-list-item-title>
@@ -90,7 +90,7 @@
       <v-list-item link @click="handleLogout">
         <v-row align="center" no-gutters>
           <v-col cols="auto">
-            <v-icon class="red--text">mdi-logout</v-icon>
+            <IconLogOut />
           </v-col>
           <v-col>
             <v-list-item-title class="ml-2 red--text">Log out</v-list-item-title>
@@ -103,26 +103,42 @@
 
 <script>
 import { mapActions } from 'vuex';
+import {
+  IconCat,
+  IconDashboard,
+  IconPaw,
+  IconHealth,
+  IconVacc,
+  IconChat,
+  IconCalendar,
+  IconSettings,
+  IconDoc,
+  IconLogOut
+} from '@/assets/icons/index';
 
 export default {
   name: 'PCSidebar',
+  components: {
+    IconCat,
+    IconLogOut
+  },
   data() {
     return {
       menuItems: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-        { title: 'Pet profile', icon: 'mdi-paw-outline' },
+        { title: 'Dashboard', icon: IconDashboard },
+        { title: 'Pet profile', icon: IconPaw },
       ],
       analyticsItems: [
-        { title: 'Health monitoring', icon: 'mdi-heart-box-outline' },
-        { title: 'Vaccination schedule', icon: 'mdi-needle' },
+        { title: 'Health monitoring', icon: IconHealth },
+        { title: 'Vaccination schedule', icon: IconVacc },
       ],
       scheduleItems: [
-        { title: 'Chat', icon: 'mdi-message-text' },
-        { title: 'Appointments', icon: 'mdi-calendar-text-outline' },
+        { title: 'Chat', icon: IconChat },
+        { title: 'Appointments', icon: IconCalendar },
       ],
       helpItems: [
-        { title: 'Settings', icon: 'mdi-cog' },
-        { title: 'Documentation', icon: 'mdi-file-document-outline' },
+        { title: 'Settings', icon: IconSettings },
+        { title: 'Documentation', icon: IconDoc },
       ],
     };
   },
@@ -147,10 +163,6 @@ export default {
 .custom-divider {
   border-color: #DAE3F8 !important;
   border: 1px solid;
-}
-
-.v-list-item-title .v-subheader {
-  color: #0B1C33;
 }
 
 .notification-chip {

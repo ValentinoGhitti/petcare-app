@@ -28,9 +28,7 @@
               class="mr-2 search-field"
             ></v-text-field>
             <!-- Search Icon -->
-            <v-icon @click="toggleSearch" class="theme--red mr-5 mb-5">
-              mdi-magnify
-            </v-icon>
+            <IconSearch @click="toggleSearch" class="theme--red mr-5 mt-2" />
             <!-- Type Selector -->
             <v-select
               dense
@@ -100,8 +98,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { IconSearch } from '../assets/icons/index';
 
 export default {
+  components: {
+    IconSearch
+  },
   props: {
     loading: Boolean
   },

@@ -35,7 +35,7 @@
             label
             @click="setActiveButton('stressLevel')"
           >
-            <v-icon left>mdi-heart-flash</v-icon>
+            <IconStress />
             Stress level
           </v-chip>
           <v-chip
@@ -45,7 +45,7 @@
             label
             @click="setActiveButton('pulse')"
           >
-            <v-icon left>mdi-pulse</v-icon>
+            <IconPulse />
             Pulse
           </v-chip>
           <v-chip
@@ -55,7 +55,7 @@
             label
             @click="setActiveButton('temperature')"
           >
-            <v-icon left>mdi-thermometer</v-icon>
+            <IconTemp />
             Temperature
           </v-chip>
           <v-chip
@@ -65,7 +65,7 @@
             label
             @click="setActiveButton('caloriesBurned')"
           >
-            <v-icon left>mdi-fire</v-icon>
+            <IconCalories />
             Calories burned
           </v-chip>
         </v-col>
@@ -89,6 +89,12 @@
 <script>
 import VueApexCharts from 'vue-apexcharts';
 import { mapGetters, mapActions } from 'vuex';
+import {
+  IconCalories,
+  IconPulse,
+  IconStress,
+  IconTemp
+} from '../assets/icons/index';
 
 export default {
   props: {
@@ -96,6 +102,10 @@ export default {
   },
   components: {
     apexchart: VueApexCharts,
+    IconCalories,
+    IconPulse,
+    IconStress,
+    IconTemp
   },
   data() {
     return {

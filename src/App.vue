@@ -29,6 +29,31 @@ export default {
 </script>
 
 <style>
+body {
+  font-family: "Bungee Tint", sans-serif;
+
+}
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6, 
+span,
+tspan,
+p, 
+small, 
+li, 
+div, 
+a,
+v-list-item-title {
+  font-family: "Rethink Sans", sans-serif !important;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: #0B1C33 !important;
+}
+
 .v-app {
   display: flex;
   flex-direction: row;
