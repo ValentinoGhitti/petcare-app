@@ -101,7 +101,7 @@ export default {
 }
 
 .search-field {
-  width: 910px;
+  width: 895px;
   border: 1px solid #DAE3F8;
   border-radius: 10px !important;
 }
