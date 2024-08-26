@@ -41,6 +41,17 @@ Pasos para configurar y ejecutar el proyecto:
     ```
 
 ---
+### CHANGELOG
+
+1. Se corrigieron estilos para ser lo más fiel posible al diseño:
+2. Se modularizó el store, separando las logicas dependiendo las views.
+
+![image](https://github.com/user-attachments/assets/e557c14b-3e57-436f-9daf-9d8f44042979)
+
+Si bien la correción decía de que que era necesario utilizar stores independientes para cada cosa, considero que por el tamaño de la app es innecesaro crear dos instancias de una store. Generaría problemas a la larga, redundancia y complejidad innecesaria.
+Modularizando de esta forma podemos mantener el código organizado, permitiendo una separación clara de responsabilidades sin la necesidad de instanciar múltiples stores.
+
+
 
 ### Funcionalidades Principales de la app
 
@@ -60,7 +71,7 @@ Pasos para configurar y ejecutar el proyecto:
 
  ### PCHealthMonitoringChart
  
-![image](https://github.com/user-attachments/assets/af18e914-f18e-4e14-85e7-8c82e9fa1d27)
+![image](https://github.com/user-attachments/assets/5c864421-015b-4764-a3a0-f822e3362a8a)
 
 - **Interactividad del Sparking**:
   - El gráfico responde a la selección de rangos de datos (Daily, Weekly, Monthly).
@@ -79,9 +90,9 @@ Pasos para configurar y ejecutar el proyecto:
 
 ---
 
-### PCStatCard
+### PCVaccinationSchedule
 
-![image](https://github.com/user-attachments/assets/0c907c3f-d9af-4c07-bea6-650cf9e3d909)
+![image](https://github.com/user-attachments/assets/98faa88b-59df-458d-a139-991c33641edc)
 
 
   - **Interfaz de Usuario**:
@@ -105,7 +116,7 @@ Pasos para configurar y ejecutar el proyecto:
 
 ### PCStatCard
 
-![image](https://github.com/user-attachments/assets/143e1860-dbad-4845-99e7-ea5d1ec84d62)
+![image](https://github.com/user-attachments/assets/d1dcd2a1-4a5b-4b25-9ffe-d0adf9dd1d57)
 
 - **Interactividad del Gráfico:**
   - Permite seleccionar el rango de datos mediante un `v-select` (Daily, Weekly, Monthly).
@@ -127,6 +138,7 @@ Pasos para configurar y ejecutar el proyecto:
 
 ## Demo
    
-![image](https://github.com/user-attachments/assets/42ba5e43-0ce5-4385-a8b2-e5f339cc5c37)
+![image](https://github.com/user-attachments/assets/f6502cee-733a-4691-bfc0-d69c10447c76)
+1920 x 1080
 
 deploy: https://petcare-app-vg.netlify.app/
