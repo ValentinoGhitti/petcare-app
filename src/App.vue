@@ -29,6 +29,10 @@ export default {
 </script>
 
 <style>
+.v-application {
+  font-family: "Rethink Sans", sans-serif !important;
+  color: #0B1C33 !important;
+}
 
 h1, 
 h2, 

@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <div>
     <!-- Loading Skeleton Loader -->
     <v-skeleton-loader
       v-if="loading"
@@ -9,12 +9,12 @@
     ></v-skeleton-loader>
 
     <!-- Main Content -->
-    <v-card class="mt-11 mx-0 mb-5 test" v-else>
+    <v-card class="mt-8 px-0 mx-0 mb-5 custom-card" v-else>
       <v-row>
         <v-col col="1" class="d-flex align-center">
-          <v-card-text class="custom-span">{{ label }}</v-card-text>
+          <span class="custom-span ml-7 mt-4">{{ label }}</span>
         </v-col>
-        <v-col col="5" md="5" xl="5" class="mr-5 mr-sm-1 mr-xl-5 mr-xs-1">
+        <v-col col="5" md="5" xl="5" class="mr-7 mt-2 mr-sm-1 mr-xl-7 mr-xs-1">
           <v-select
             dense
             hide-details
@@ -28,12 +28,13 @@
       </v-row>
       <apexchart
         type="radialBar"
-        height="400"
+        width="400"
+        class="chart"
         :options="chartOptions"
         :series="[currentValue]"
       ></apexchart>
     </v-card>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -59,7 +60,7 @@ export default {
       lastUpdate: null,
       chartOptions: {
         chart: {
-          height: 400,
+          height: 700,
           type: 'radialBar',
         },
         stroke: {
@@ -127,6 +128,44 @@ export default {
 <style scoped>
 .v-card {
   border-radius: 16px;
+  border: #DAE3F8 1px solid;
+  box-shadow: none !important;
+}
+
+.container {
+  padding: 0px !important;
+}
+
+.v-select >>> .v-select__selection--comma {
+  overflow: visible !important;
+}
+
+.v-select.v-input--dense >>> .v-select__selection--comma {
+  margin: 0;
+}
+
+.theme--light.v-select >>> .v-select__selections {
+  color: #0B1C33 !important;
+  font-size: 14px;
+  font-weight: 550;
+}
+
+span {
+  opacity: 70% !important;
+  font-weight: 500;
+}
+
+.chart {
+  position: absolute;
+  left: -65px;
+  top: 50px;
+}
+
+.custom-card {
+  width: 277.33px;
+  height: 330px;
+  gap: 0px;
+  position: relative;
 }
 
 .custom-select {
@@ -140,11 +179,11 @@ export default {
 }
 
 .custom-span {
-  font-size: 12px;
+  font-size: 15px;
 }
 
 .v-text-field--outlined >>> fieldset {
-  border: 2px solid #DAE3F8;
+  border: 1px solid #DAE3F8;
   border-radius: 9px !important;
 }
 

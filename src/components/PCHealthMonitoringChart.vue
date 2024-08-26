@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <div>
     <!-- Loading Skeleton Loader -->
     <v-skeleton-loader
       v-if="loading"
@@ -9,24 +9,25 @@
     ></v-skeleton-loader>
 
     <!-- Main Content -->
-    <div v-else>
-      <v-row class="d-flex justify-center">
-        <v-col lg="8" class="d-flex align-center px-0 mb-6">
-          <v-card-text>HEALTH MONITORING</v-card-text>
+    <v-card class=" mx-0 custom-card" v-else>
+      <v-row class="mb-2">
+        <v-col col="1" class="d-flex align-center mt-6">
+          <span class="custom-span ml-7 mt-4">HEALTH MONITORING</span>
         </v-col>
-        <v-col lg="3">
+        <v-col col="2" md="2" xl="2" class="mr-7 mt-2 mr-sm-1 mr-xl-7 mr-xs-1">
           <v-select
             dense
-            class="px-0 mr-5 mr-sm-5 mr-lg-5 mr-xl-5 mr-xs-5"
+            hide-details
             :items="['Daily', 'Weekly', 'Monthly']"
             outlined
+            class="mr-5 mt-6 custom-select"
             v-model="selectedRange"
             @change="updateChartRange"
           ></v-select>
         </v-col>
       </v-row>
 
-      <v-row class="d-flex justify-center mb-1">
+      <v-row class="d-flex justify-center">
         <v-col lg="11" class="box-toggle d-flex justify-center justify-space-between text-center">
           <v-chip
             class="ma-2 toggle-active"
@@ -35,7 +36,7 @@
             label
             @click="setActiveButton('stressLevel')"
           >
-            <IconStress />
+            <IconStress class="mr-2" />
             Stress level
           </v-chip>
           <v-chip
@@ -45,7 +46,7 @@
             label
             @click="setActiveButton('pulse')"
           >
-            <IconPulse />
+            <IconPulse class="mr-2" />
             Pulse
           </v-chip>
           <v-chip
@@ -55,7 +56,7 @@
             label
             @click="setActiveButton('temperature')"
           >
-            <IconTemp />
+            <IconTemp class="mr-2" />
             Temperature
           </v-chip>
           <v-chip
@@ -65,25 +66,26 @@
             label
             @click="setActiveButton('caloriesBurned')"
           >
-            <IconCalories />
+            <IconCalories class="mr-2" />
             Calories burned
           </v-chip>
         </v-col>
       </v-row>
 
       <v-row>
-        <v-col lg="12" class="chart-container">
+        <v-col lg="12" class="chart-container d-flex justify-center">
           <apexchart
             ref="chart"
             type="area"
-            height="300"
+            height="367"
+            width="805"
             :options="chartOptions"
             :series="[{ name: 'Activity', data: series }]">
           </apexchart>
         </v-col>
       </v-row>
-    </div>
-  </v-card>
+    </v-card>
+  </div>
 </template>
 
 <script>
@@ -114,7 +116,7 @@ export default {
       chartOptions: {
         chart: {
           type: 'area',
-          height: 350,
+          height: 387,
           zoom: { enabled: false },
           toolbar: { show: false },
           background: '#FFFFFF'
@@ -135,9 +137,16 @@ export default {
           }
         },
         colors: ['#0288D1'],
+        grid: {
+          strokeDashArray: 4,
+          borderColor: '#DAE3F8',
+        },
         xaxis: {
           categories: this.getCategoriesForRange('Monthly'),
-          labels: { rotate: -45, align: 'right' }
+          labels: { rotate: -45, align: 'right' },
+          crosshairs: {
+            show: false
+          }
         },
         yaxis: {
           min: 1,
@@ -212,6 +221,36 @@ export default {
 <style scoped>
 .v-card {
   border-radius: 16px;
+  border: #DAE3F8 1px solid;
+  box-shadow: none !important;
+}
+
+.v-select >>> .v-select__selection--comma {
+  overflow: visible !important;
+}
+
+.v-select.v-input--dense >>> .v-select__selection--comma {
+  margin: 0;
+}
+
+.theme--light.v-select >>> .v-select__selections {
+  color: #0B1C33 !important;
+  font-size: 14px;
+  font-weight: 550;
+}
+
+.custom-span {
+  color: #0B1C33 !important;
+  opacity: 70% !important;
+  font-weight: 500;
+}
+
+.custom-card {
+  width: 910px;
+  height: 577px;
+  gap: 0px;
+  opacity: 0px;
+  position: relative;
 }
 
 .custom-select {
@@ -244,12 +283,14 @@ export default {
 .chart-container {
   width: 100%;
   height: 100%;
+  padding-top: 0;
   min-height: 350px;
 }
 
 .box-toggle {
-  border: 2px solid #DAE3F8;
-  border-radius: 20px !important;
+  border: 1px solid #DAE3F8;
+  border-radius: 15px !important;
+  padding: 0;
 }
 
 .buttons-border {

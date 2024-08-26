@@ -5,21 +5,21 @@
       <v-col md="7">
         <!-- Stat Cards -->
         <v-row>
-          <v-col class="px-0 mr-0" md="4">
+          <v-col md="4">
             <PCStatCard 
               label="ACTIVITY"
               color="#E53761"
               :loading="loading"
             />
           </v-col>
-          <v-col class="px-0" md="4">
+          <v-col md="4">
             <PCStatCard
               label="SLEEP"
               color="#27A468"
               :loading="loading"
             />
           </v-col>
-          <v-col class="px-0" md="4">
+          <v-col md="4">
             <PCStatCard
               label="WELNESS"
               class="f-5"
@@ -75,7 +75,7 @@ export default {
   padding: 16px;
   flex-grow: 1;
   background: #F2F5FA;
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <!-- Loading Skeleton Loader -->
     <v-skeleton-loader
       v-if="loading"
@@ -10,30 +10,20 @@
     ></v-skeleton-loader>
 
     <!-- Main Content -->
-    <v-card v-else height="450px" class="pa-5 mt-8">
-      <v-row class="d-flex justify-center">
+    <v-card v-else class="custom-card pa-6 mt-8">
+      <v-row class="">
         <!-- Title and Search Controls -->
-        <v-col lg="5" class="d-flex align-center mb-6">
-          <span>VACCINATION SCHEDULE</span>
+        <v-col cols="8" class="d-flex align-center pt-0">
+          <span class="custom-span">VACCINATION SCHEDULE</span>
         </v-col>
-        <v-col lg="7" class="d-flex align-center">
-          <v-col class="custom-align-center" cols="auto">
-            <!-- Search Field -->
-            <v-text-field
-              v-if="searchVisible"
-              v-model="searchQuery"
-              label="Search"
-              dense
-              hide-details
-              class="mr-2 search-field"
-            ></v-text-field>
-            <!-- Search Icon -->
-            <IconSearch @click="toggleSearch" class="theme--red mr-5 mt-2" />
-            <!-- Type Selector -->
+        <v-col cols="4" class="d-flex align-center">
+          <IconSearch class="ml-7 mb-4" />
+          <v-col class="custom-align-center mb-5" cols="9">
             <v-select
               dense
               :items="['All', 'Overdue', 'Core', 'Noncore']"
               outlined
+              class="custom-select "
               v-model="selectedType"
               @change="updateSelectedType"
             ></v-select>
@@ -49,7 +39,7 @@
       >
         <template v-slot:body="{ items }">
           <tbody>
-            <tr height="65px" v-for="item in items" :key="item.name">
+            <tr height="77px" v-for="item in items" :key="item.name">
               <td>{{ item.name }}</td>
               <td>
                 <v-chip
@@ -73,7 +63,7 @@
                       :class="{ 'btn-active': item.veterinarian }"
                       @click="toggleMenu(item.name)"
                     >
-                      {{ item.veterinarian || 'Select Vet' }}
+                      {{ item.veterinarian || 'Find veterinar' }}
                     </v-btn>
                   </template>
                   <v-list>
@@ -93,7 +83,7 @@
         </template>
       </v-data-table>
     </v-card>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -115,9 +105,7 @@ export default {
         { text: 'Type', value: 'type' },
         { text: 'Date', value: 'date' },
         { text: 'Veterinarian', value: 'veterinarian' }
-      ],
-      searchVisible: false,
-      searchQuery: ''
+      ]
     };
   },
 
@@ -166,13 +154,6 @@ export default {
       return this.getAssignedVeterinarians.includes(veterinarianName);
     },
 
-    toggleSearch() {
-      this.searchVisible = !this.searchVisible;
-      if (!this.searchVisible) {
-        this.searchQuery = '';
-      }
-    },
-
     toggleMenu(itemName) {
       const item = this.filteredVaccinations.find(v => v.name === itemName);
       if (item) {
@@ -194,26 +175,76 @@ export default {
 <style scoped>
 .v-card {
   border-radius: 16px;
+  border: #DAE3F8 1px solid;
+  box-shadow: none !important;
+}
+
+.v-data-table >>> thead > tr > th > span {
+  font-size: 14px;
+  color: #0B1C33 !important;
+  opacity: 70%;
+}
+
+.v-data-table >>> thead > tr > th {
+  height: 70px !important;
+  line-height: 70px !important;
+}
+
+.v-select.v-input--dense >>> .v-select__selection--comma {
+  margin: 0;
+}
+
+.theme--light.v-select >>> .v-select__selections {
+  color: #0B1C33 !important;
+  font-size: 14px;
+  font-weight: 550;
+}
+
+.custom-span {
+  opacity: 70% !important;
+  font-weight: 500;
+  color: #0B1C33 !important;
+}
+
+.custom-select {
+  font-size: 0.75rem;
+  font-weight: bold;
+  height: 40px;
+  width: 100%;
+  line-height: 0.5rem;
+  overflow: hidden;
+  margin-top: 0.4rem;
+}
+
+.custom-card {
+  height: 510px !important;
+  gap: 0px;
+  opacity: 0px;
+  position: relative;
+}
+
+tr {
+  border-radius: 16px;
 }
 
 /* Estilos para Chips */
 .theme--light .v-chip.chip-overdue {
   background-color: #FCEBEF;
   color: #D03258;
-  border: 2px solid #F7C1CE;
+  border: 1px solid #F7C1CE;
   border-radius: 8px !important;
 }
 
 .theme--light .v-chip.chip-noncore {
   background-color: #FCF5EB;
   color: #F2A735;
-  border: 2px solid #F7E1C1;
+  border: 1px solid #F7E1C1;
   border-radius: 8px !important;
 }
 
 .theme--light .v-chip.chip-core {
   background-color: #EAF8F1;
-  border: 2px solid #BDE8D3;
+  border: 1px solid #BDE8D3;
   color: #27A468;
   width: 75px;
   text-align: center;
@@ -230,8 +261,9 @@ export default {
 
 .custom-data-table {
   background-color: #F2F5FA;
-  border: 3px solid #DAE3F8;
-  border-radius: 16px;
+  border: 1px solid #DAE3F8;
+  border-radius: 16px 16px 0px 0px !important;
+  height: 382px !important;
   color: white;
   font-weight: bold;
 }
@@ -245,8 +277,8 @@ tbody {
 
 .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > td:not(.v-data-table__mobile-row),
 .theme--light.v-data-table > .v-data-table__wrapper > table > tbody > tr:not(:last-child) > th:not(.v-data-table__mobile-row) {
-  border-bottom: 2px solid #DAE3F8;
-  border-top: 2px solid #DAE3F8;
+  border-bottom: 1px solid #DAE3F8;
+  border-top: 1px solid #DAE3F8;
 }
 
 .v-list-item {
@@ -292,11 +324,13 @@ tbody {
   text-transform: none;
   background-color: #3788E5; 
   color: #FEFEFE;
-  width: 100px;
+  width: 124px;
   border-radius: 8px;
-  font-weight: normal;
+  height: 38;
+  font-weight: 500;
   font-size: 0.9rem;
   line-height: 22.4px;
+  box-shadow: none;
 }
 
 .my-custom-btn.btn-active {
@@ -304,15 +338,15 @@ tbody {
   border-radius: 8px;
   font-size: 0.8rem;
   line-height: 22.4px;
-  font-weight: normal;
+  font-weight: 500;
   color: #0B1C33;
   box-shadow: none;
-  border: 2px solid #DAE3F8;
+  border: 1px solid #DAE3F8;
 }
 
 /* Select */
 .v-text-field--outlined >>> fieldset {
-  border: 2px solid #DAE3F8;
+  border: 1px solid #DAE3F8;
   border-radius: 9px !important;
 }
 

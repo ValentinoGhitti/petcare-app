@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app elevation="3" class="top-bar">
     <!-- Search Field -->
-    <v-col cols="col-6">
+    <v-col cols="col-8">
       <v-text-field
         solo
         flat
@@ -16,20 +16,20 @@
     </v-col>
 
     <!-- Desktop Actions -->
-    <v-col cols="col-3" class="d-none d-lg-flex justify-end align-center">
-      <v-btn icon color="primary" class="mr-4">
+    <v-col cols="col-2" class="d-none d-lg-flex justify-end align-center">
+      <v-btn icon color="primary" class="mr-3">
         <IconHelp />
       </v-btn>
-      <v-btn icon color="primary" class="mr-4">
+      <v-btn icon color="primary" class="mr-3">
         <IconNotification />
       </v-btn>
-      <v-btn class="ml-4 custom-btn">
+      <a class="ml-4 custom-btn">
         Add widget
-      </v-btn>
+      </a>
     </v-col>
 
     <!-- Mobile Menu -->
-    <v-col cols="col-3" class="d-lg-none d-flex justify-center align-center">
+    <v-col cols="col-2" class="d-lg-none d-flex justify-center align-center">
       <v-menu offset-y>
         <template v-slot:activator="{ attrs, on }">
           <v-btn
@@ -82,22 +82,42 @@ export default {
   border-right: 1px solid #FEFEFE !important;
   border-bottom: 2px solid #DAE3F8 !important;
   border-top: #DAE3F8 1px solid;
-  padding-top: 10px;
-  padding-bottom: 90px;
+  padding-top: 14px;
+  padding-bottom: 79px;
   box-shadow: none !important;
 }
 
 .custom-btn {
   background-color: #3788E5 !important;
-  color: #FEFEFE;
+  color: #FEFEFE !important;
+  padding: 10px 15px;
+  border-radius: 10px;
   box-shadow: none;
+  margin-right: 20px;
   text-transform: none !important;
+  font-size: 1rem;
+  font-weight: 500;
+  box-sizing: border-box;
 }
 
 .search-field {
-  width: 600px;
+  width: 910px;
   border: 1px solid #DAE3F8;
   border-radius: 10px !important;
+}
+
+.theme--light.v-input >>> input,
+.theme--light.v-input >>> textarea {
+  font-size: 15px;
+  font-weight: 600;
+  margin-left: 15px;
+  margin-top: 3px;
+}
+
+.theme--light.v-input >>> input::placeholder,
+.theme--light.v-input >>> textarea::placeholder {
+  color: #0B1C33 !important;
+  opacity: 70%;
 }
 
 .black-icon {
