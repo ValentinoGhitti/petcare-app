@@ -140,5 +140,3 @@ Modularizando de esta forma podemos mantener el código organizado, permitiendo 
    
 ![image](https://github.com/user-attachments/assets/f6502cee-733a-4691-bfc0-d69c10447c76)
 1920 x 1080
-
-deploy: https://petcare-app-vg.netlify.app/
