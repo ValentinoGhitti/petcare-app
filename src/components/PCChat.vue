@@ -10,7 +10,7 @@
 
     <!-- Chat Content -->
     <v-card v-else class="pa-4 mt-0">
-      <v-card-text>CHAT</v-card-text>
+      <span>CHAT</span>
       <v-list>
         <v-list-item v-for="chat in chats" :key="chat.name">
           <v-badge :color="chat.color" class="mx-5 py-3" left dot></v-badge>
@@ -29,6 +29,7 @@
         </v-list-item>
       </v-list>
     </v-card>
+    
   </v-container>
 </template>
 
@@ -57,10 +58,6 @@ export default {
 
 .v-list-item-title {
   font-weight: bold;
-}
-
-.v-list-item-subtitle {
-  color: grey;
 }
 
 .theme--light.v-card > .v-card__text,

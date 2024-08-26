@@ -14,7 +14,7 @@
       <v-row class="d-flex justify-center">
         <!-- Title and Search Controls -->
         <v-col lg="5" class="d-flex align-center mb-6">
-          <span class="my-text">VACCINATION SCHEDULE</span>
+          <span>VACCINATION SCHEDULE</span>
         </v-col>
         <v-col lg="7" class="d-flex align-center">
           <v-col class="custom-align-center" cols="auto">
@@ -226,10 +226,6 @@ export default {
 .theme--light .v-chip.chip-default {
   background-color: #E0E0E0;
   color: #757575;
-}
-
-.my-text {
-  color: #0B1C33 !important;
 }
 
 .custom-data-table {
